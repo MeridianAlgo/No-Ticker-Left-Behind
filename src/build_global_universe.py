@@ -61,7 +61,9 @@ def _write_tickers(path: str, tickers: Iterable[str]) -> None:
 
 def _eodhd_exchanges_list(api_key: str, timeout_s: int = 60) -> List[Dict[str, str]]:
     url = "https://eodhd.com/api/exchanges-list/"
-    r = requests.get(url, params={"api_token": api_key, "fmt": "json"}, timeout=timeout_s)
+    r = requests.get(
+        url, params={"api_token": api_key, "fmt": "json"}, timeout=timeout_s
+    )
     r.raise_for_status()
     data = r.json()
     if not isinstance(data, list):
@@ -69,10 +71,14 @@ def _eodhd_exchanges_list(api_key: str, timeout_s: int = 60) -> List[Dict[str, s
     return [d for d in data if isinstance(d, dict)]
 
 
-def _eodhd_exchange_symbols(api_key: str, exchange_code: str, timeout_s: int = 60) -> List[str]:
+def _eodhd_exchange_symbols(
+    api_key: str, exchange_code: str, timeout_s: int = 60
+) -> List[str]:
     # Requires an API key. See: https://eodhd.com/
     url = f"https://eodhd.com/api/exchange-symbol-list/{exchange_code}"
-    r = requests.get(url, params={"api_token": api_key, "fmt": "json"}, timeout=timeout_s)
+    r = requests.get(
+        url, params={"api_token": api_key, "fmt": "json"}, timeout=timeout_s
+    )
     r.raise_for_status()
     data = r.json()
     out: List[str] = []
@@ -101,7 +107,9 @@ def _normalize_exchange_code(code: str) -> str:
     return aliases.get(c, c)
 
 
-def _suggest_exchange_code(exchanges: List[Dict[str, str]], wanted: str) -> Optional[str]:
+def _suggest_exchange_code(
+    exchanges: List[Dict[str, str]], wanted: str
+) -> Optional[str]:
     w = wanted.strip().lower()
     # Try exact code match
     for d in exchanges:
@@ -153,7 +161,9 @@ def main() -> int:
     # Optional provider: EODHD exchange symbol lists
     if args.eodhd_exchanges:
         if not args.eodhd_api_key:
-            raise RuntimeError("--eodhd-exchanges provided but no EODHD API key was set")
+            raise RuntimeError(
+                "--eodhd-exchanges provided but no EODHD API key was set"
+            )
 
         exchanges_meta: List[Dict[str, str]] = []
         try:
@@ -170,11 +180,21 @@ def main() -> int:
                     tickers.add(_to_yahoo_ticker(code, sym))
                 print(f"EODHD OK: {requested} -> {code} ({len(syms)} tickers)")
             except requests.HTTPError as e:
-                msg = f"HTTP {e.response.status_code}" if getattr(e, "response", None) is not None else "HTTP error"
+                msg = (
+                    f"HTTP {e.response.status_code}"
+                    if getattr(e, "response", None) is not None
+                    else "HTTP error"
+                )
                 failures.append((requested, msg))
-                suggestion = _suggest_exchange_code(exchanges_meta, requested) if exchanges_meta else None
+                suggestion = (
+                    _suggest_exchange_code(exchanges_meta, requested)
+                    if exchanges_meta
+                    else None
+                )
                 if suggestion and suggestion != code:
-                    print(f"EODHD FAIL: {requested} -> {code} ({msg}). Try exchange code: {suggestion}")
+                    print(
+                        f"EODHD FAIL: {requested} -> {code} ({msg}). Try exchange code: {suggestion}"
+                    )
                 else:
                     print(f"EODHD FAIL: {requested} -> {code} ({msg}). Skipping.")
                 continue

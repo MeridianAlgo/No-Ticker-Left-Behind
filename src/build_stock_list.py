@@ -5,9 +5,9 @@ import os
 import re
 import sqlite3
 import time
-from io import StringIO
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
+from io import StringIO
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 import pandas as pd
@@ -75,7 +75,9 @@ def _download_text(url: str, timeout_s: int = 60) -> str:
     return r.text
 
 
-def _download_text_with_retries(url: str, timeout_s: int = 60, attempts: int = 3) -> str:
+def _download_text_with_retries(
+    url: str, timeout_s: int = 60, attempts: int = 3
+) -> str:
     last_err: Optional[BaseException] = None
     for i in range(attempts):
         try:
@@ -108,7 +110,9 @@ def fetch_nasdaq_trader_listings() -> pd.DataFrame:
         # Files are pipe-delimited and end with a summary row.
         lines = [ln for ln in txt.splitlines() if ln.strip()]
         header = lines[0].split("|")
-        body = [ln.split("|") for ln in lines[1:] if not ln.startswith("File Creation Time")]
+        body = [
+            ln.split("|") for ln in lines[1:] if not ln.startswith("File Creation Time")
+        ]
         df = pd.DataFrame(body, columns=header)
 
         # Remove the final summary row(s) like "File Creation Time" or "Number of..."
@@ -157,7 +161,9 @@ def _stooq_extract_group_links(html: str) -> List[Dict[str, str]]:
     # If the page is JS-driven, links may not exist as <a> tags. Try regex extraction.
     if not groups:
         for gid in sorted(set(re.findall(r"/db/l/\?g=(\d+)", html))):
-            groups.append({"href": f"https://stooq.com/db/l/?g={gid}", "label": f"g={gid}"})
+            groups.append(
+                {"href": f"https://stooq.com/db/l/?g={gid}", "label": f"g={gid}"}
+            )
     # De-dup
     seen = set()
     out: List[Dict[str, str]] = []
@@ -207,7 +213,9 @@ def _stooq_parse_group_table(html: str) -> pd.DataFrame:
     return pd.DataFrame(parsed)
 
 
-def fetch_stooq_global_listings(timeout_s: int = 60, verbose: bool = False) -> pd.DataFrame:
+def fetch_stooq_global_listings(
+    timeout_s: int = 60, verbose: bool = False
+) -> pd.DataFrame:
     # Best-effort global universe by scraping Stooq's database group pages.
     index_html = _download_text_with_retries(STOOQ_DB_URL, timeout_s=timeout_s)
     groups = _stooq_extract_group_links(index_html)
@@ -309,7 +317,7 @@ def enrich_with_yfinance(
     else:
         tickers_list = tickers_list[start:]
     if max_tickers is not None:
-        tickers_list = tickers_list[: max_tickers]
+        tickers_list = tickers_list[:max_tickers]
 
     rows: List[Dict[str, Any]] = []
 
@@ -354,7 +362,9 @@ def _epoch_to_date_str(epoch: Any) -> Optional[str]:
         return None
     try:
         epoch_int = int(epoch)
-        return dt.datetime.fromtimestamp(epoch_int, tz=dt.timezone.utc).date().isoformat()
+        return (
+            dt.datetime.fromtimestamp(epoch_int, tz=dt.timezone.utc).date().isoformat()
+        )
     except Exception:
         return None
 
@@ -436,9 +446,13 @@ def normalize_schema(listings: pd.DataFrame, yf_info: pd.DataFrame) -> pd.DataFr
     out = pd.DataFrame(
         {
             "ticker": merged["ticker"],
-            "company_name": col("longName").fillna(col("shortName")).fillna(listing_company),
+            "company_name": col("longName")
+            .fillna(col("shortName"))
+            .fillna(listing_company),
             "quote_type": col("quoteType").fillna(listing_quote_type),
-            "exchange": col("exchange").fillna(col("fullExchangeName")).fillna(listing_exchange),
+            "exchange": col("exchange")
+            .fillna(col("fullExchangeName"))
+            .fillna(listing_exchange),
             "exchange_name": col("fullExchangeName").fillna(listing_exchange),
             "currency": col("currency"),
             "country": col("country"),
@@ -472,7 +486,11 @@ def read_existing_tickers(path: str) -> set:
     if os.path.exists(path):
         try:
             with open(path, "r", encoding="utf-8") as f:
-                return {line.strip() for line in f.read().splitlines() if line.strip() and not line.startswith("#")}
+                return {
+                    line.strip()
+                    for line in f.read().splitlines()
+                    if line.strip() and not line.startswith("#")
+                }
         except Exception:
             return set()
     return set()
@@ -496,25 +514,31 @@ def read_existing_csv(path: str) -> pd.DataFrame:
     return pd.DataFrame()
 
 
-def merge_with_existing_data(new_data: pd.DataFrame, existing_data: pd.DataFrame) -> pd.DataFrame:
+def merge_with_existing_data(
+    new_data: pd.DataFrame, existing_data: pd.DataFrame
+) -> pd.DataFrame:
     """Merge new data with existing data, preferring new data for duplicates."""
     if existing_data.empty:
         return new_data
-    
+
     # Combine existing and new data
     combined = pd.concat([existing_data, new_data], ignore_index=True)
-    
+
     # Remove rows with empty tickers
-    combined = combined[combined["ticker"].notna() & (combined["ticker"].astype(str).str.strip() != "")]
+    combined = combined[
+        combined["ticker"].notna() & (combined["ticker"].astype(str).str.strip() != "")
+    ]
     combined["ticker"] = combined["ticker"].astype(str).str.strip()
-    
+
     # Sort by ticker and updated_at_utc to prefer newer records
-    combined['updated_at_utc'] = pd.to_datetime(combined['updated_at_utc'], errors='coerce')
-    combined = combined.sort_values(['ticker', 'updated_at_utc'], na_position='last')
-    
+    combined["updated_at_utc"] = pd.to_datetime(
+        combined["updated_at_utc"], errors="coerce"
+    )
+    combined = combined.sort_values(["ticker", "updated_at_utc"], na_position="last")
+
     # Drop duplicates, keeping the first (newest) record
-    combined = combined.drop_duplicates(subset=['ticker'], keep='first')
-    
+    combined = combined.drop_duplicates(subset=["ticker"], keep="first")
+
     return combined
 
 
@@ -542,7 +566,8 @@ def write_sqlite_upsert(df: pd.DataFrame, path: str) -> None:
     conn = sqlite3.connect(path)
     cur = conn.cursor()
     # Ensure the table exists with a primary key on ticker
-    cur.execute("""
+    cur.execute(
+        """
         CREATE TABLE IF NOT EXISTS stocks (
             ticker TEXT PRIMARY KEY,
             company_name TEXT,
@@ -562,7 +587,8 @@ def write_sqlite_upsert(df: pd.DataFrame, path: str) -> None:
             listing_source TEXT,
             updated_at_utc TEXT
         )
-    """)
+    """
+    )
     # Upsert each row
     for _, row in df.iterrows():
         cols = list(df.columns)
@@ -577,9 +603,14 @@ def write_sqlite_upsert(df: pd.DataFrame, path: str) -> None:
             cur.execute(sql, tuple(row[c] for c in cols))
         except sqlite3.OperationalError as e:
             # If table exists without primary key or missing columns, recreate it
-            if "ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint" in str(e) or "has no column named" in str(e):
+            if (
+                "ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint"
+                in str(e)
+                or "has no column named" in str(e)
+            ):
                 cur.execute("DROP TABLE stocks")
-                cur.execute("""
+                cur.execute(
+                    """
                     CREATE TABLE stocks (
                         ticker TEXT PRIMARY KEY,
                         company_name TEXT,
@@ -599,7 +630,8 @@ def write_sqlite_upsert(df: pd.DataFrame, path: str) -> None:
                         listing_source TEXT,
                         updated_at_utc TEXT
                     )
-                """)
+                """
+                )
                 cur.execute(sql, tuple(row[c] for c in cols))
             else:
                 raise
@@ -623,13 +655,30 @@ def main() -> int:
     p.add_argument("--workers", type=int, default=2)
     p.add_argument("--max-retries", type=int, default=6)
     p.add_argument("--no-yfinance", action="store_true")
-    p.add_argument("--start", type=int, default=0, help="Start index into the ticker list (for chunked runs)")
-    p.add_argument("--count", type=int, default=None, help="Number of tickers to process from --start")
+    p.add_argument(
+        "--start",
+        type=int,
+        default=0,
+        help="Start index into the ticker list (for chunked runs)",
+    )
+    p.add_argument(
+        "--count",
+        type=int,
+        default=None,
+        help="Number of tickers to process from --start",
+    )
     p.add_argument("--universe", choices=["us", "global", "all"], default="us")
     p.add_argument("--global-source", choices=["file", "stooq"], default="file")
-    p.add_argument("--global-file", default=os.path.join("inputs", "global_tickers.txt"))
+    p.add_argument(
+        "--global-file", default=os.path.join("inputs", "global_tickers.txt")
+    )
     p.add_argument("--verbose", action="store_true")
-    p.add_argument("--db-mode", choices=["replace", "upsert"], default="replace", help="SQLite write mode: replace (default) or upsert (persistent across runs)")
+    p.add_argument(
+        "--db-mode",
+        choices=["replace", "upsert"],
+        default="replace",
+        help="SQLite write mode: replace (default) or upsert (persistent across runs)",
+    )
     args = p.parse_args()
 
     universes: List[Tuple[str, pd.DataFrame]] = []
@@ -637,24 +686,38 @@ def main() -> int:
         universes.append(("us", fetch_nasdaq_trader_listings()))
     if args.universe in ("global", "all"):
         if args.global_source == "stooq":
-            universes.append(("global", fetch_stooq_global_listings(verbose=args.verbose)))
+            universes.append(
+                ("global", fetch_stooq_global_listings(verbose=args.verbose))
+            )
         else:
-            universes.append(("global", fetch_global_listings_from_file(args.global_file)))
+            universes.append(
+                ("global", fetch_global_listings_from_file(args.global_file))
+            )
 
     if args.verbose:
-        print(f"Starting build: universe={args.universe} global_source={args.global_source}")
+        print(
+            f"Starting build: universe={args.universe} global_source={args.global_source}"
+        )
 
     for name, listings in universes:
         if "ticker" not in listings.columns:
-            raise RuntimeError(f"Universe '{name}' listings did not include a ticker column")
+            raise RuntimeError(
+                f"Universe '{name}' listings did not include a ticker column"
+            )
         tickers = listings["ticker"].dropna().astype(str).unique().tolist()
         if args.verbose:
-            print(f"Universe={name} listings_rows={len(listings)} unique_tickers={len(tickers)}")
+            print(
+                f"Universe={name} listings_rows={len(listings)} unique_tickers={len(tickers)}"
+            )
             if not args.no_yfinance:
                 if args.count is None:
-                    print(f"Universe={name} yfinance chunk start={args.start} count=ALL")
+                    print(
+                        f"Universe={name} yfinance chunk start={args.start} count=ALL"
+                    )
                 else:
-                    print(f"Universe={name} yfinance chunk start={args.start} count={args.count}")
+                    print(
+                        f"Universe={name} yfinance chunk start={args.start} count={args.count}"
+                    )
         if not tickers:
             if name == "global" and args.global_source == "file":
                 print(
@@ -692,7 +755,7 @@ def main() -> int:
 
         if args.verbose:
             print(f"Universe={name} writing CSV: {out_csv}")
-        
+
         # Read existing data and merge with new data to preserve existing stocks
         existing_data = read_existing_csv(out_csv)
         merged_data = merge_with_existing_data(normalized, existing_data)
@@ -708,12 +771,12 @@ def main() -> int:
             write_sqlite(normalized, out_db)
         if args.verbose:
             print(f"Universe={name} writing tickers: {out_txt}")
-        
+
         # Merge with existing tickers to preserve them
         existing_tickers = read_existing_tickers(out_txt)
         new_tickers = set(normalized["ticker"].dropna().astype(str).unique())
         all_tickers = existing_tickers.union(new_tickers)
-        
+
         # Create a DataFrame with all tickers for writing
         all_tickers_df = pd.DataFrame({"ticker": sorted(all_tickers)})
         write_tickers_txt(all_tickers_df, out_txt)
