@@ -6,14 +6,9 @@ This repository contians all tickers for all stocks across the world, and genera
 
 Generated into `data/`:
 
-- US universe:
-  - `data/US_Stocks.csv`
-  - `data/US_Stocks.sqlite` (table: `stocks`)
-  - `data/US_Tickers.txt` (one ticker per line)
-- Global universe:
-  - `data/Global_Stocks.csv`
-  - `data/Global_Stocks.sqlite` (table: `stocks`)
-  - `data/Global_Tickers.txt` (one ticker per line)
+- **All_Stocks.csv** - Combined universe with all stocks and detailed company information
+- **All_Stocks.sqlite** - Indexed database (table: `stocks`) for fast queries
+- **All_Tickers.txt** - Simple ticker list (one per line)
 
 ## Data sources
 
@@ -54,7 +49,15 @@ Notes:
 python -m venv .venv
 # activate venv
 pip install -r requirements.txt
+
+# Build US universe
 python src/build_stock_list.py --universe us
+
+# Build Global universe
+python src/build_stock_list.py --universe global --global-source file
+
+# Combine both universes into a single comprehensive list
+python src/combine_universes.py --out-csv data/All_Stocks.csv --out-db data/All_Stocks.sqlite --out-txt data/All_Tickers.txt --out-json data/All_Stocks.json
 ```
 
 Optional flags:
@@ -79,7 +82,14 @@ You can run using the venv interpreter directly:
 
 ## GitHub Actions
 
-A weekly workflow refreshes the outputs and commits updated files back into the repository.
+A weekly workflow (every Monday at 2 AM UTC) automatically:
+- Fetches the latest stock data from free APIs (Yahoo Finance, NASDAQ Trader)
+- Lints Python code with ruff and pylint
+- Builds US and Global universes
+- Combines them into a single comprehensive dataset
+- Commits updated files back to the repository
+- Creates GitHub issues if the build fails
+- Auto-closes issues when the build succeeds
 
 ## Progress output
 
@@ -118,6 +128,54 @@ For the global universe (or very large US lists), Yahoo will rate-limit if you t
 - `--db-mode upsert` keeps the same SQLite DB and CSV, updating rows for the current chunk and adding new ones.
 - Each run exports the full CSV from the DB, so you always get a complete file.
 - Use `--workers 1` and `--sleep-s 1.2` (or higher) to avoid Yahoo rate limits.
+
+## Combining universes
+
+After building both US and Global universes, combine them into a single comprehensive dataset:
+
+```bash
+python src/combine_universes.py --out-csv data/All_Stocks.csv --out-db data/All_Stocks.sqlite --out-txt data/All_Tickers.txt
+```
+
+This creates:
+- `data/All_Stocks.csv` - All stocks with detailed company information
+- `data/All_Stocks.sqlite` - Indexed database for fast queries
+- `data/All_Tickers.txt` - All unique tickers
+
+The combined dataset includes:
+- **Detailed company information**: name, sector, industry, country, exchange, market cap, employees, website, business summary
+- **Indexed queries**: Fast lookups by ticker, exchange, sector, or country
+- **Deduplication**: Automatic removal of duplicate tickers across universes
+
+## Enrichment Status
+
+The enrichment process fetches detailed company information from Yahoo Finance for each ticker. This takes time due to rate limits:
+
+- **US Stocks**: ✅ Fully enriched (5,263 stocks)
+- **Global Stocks**: ⚠️ In progress (57,358 stocks)
+- **Estimated time**: ~27 hours for full global enrichment at 1.7s per ticker
+
+### Check enrichment progress:
+```bash
+python check_enrichment_status.py
+```
+
+### Continue enrichment:
+```bash
+# Process all remaining stocks automatically
+python enrich_all_global_stocks.py
+
+# Or process individual chunks manually (500 tickers each)
+python enrich_global_stocks.py 1000  # Process tickers 1000-1500
+python enrich_global_stocks.py 1500  # Process tickers 1500-2000
+# Continue incrementing by 500...
+```
+
+The enrichment uses:
+- **Chunked processing**: 500 tickers at a time
+- **Database upsert mode**: Progress is saved after each chunk
+- **Rate limit protection**: 1.5s delay between requests, automatic retry with exponential backoff
+- **Single worker**: Avoids overwhelming Yahoo Finance API
 
 ## Credits
 

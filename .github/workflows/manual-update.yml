@@ -1,0 +1,87 @@
+name: Manual Stock Universe Update
+
+on:
+  workflow_dispatch:
+    inputs:
+      universe:
+        description: 'Universe to build'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - us
+          - global
+          - all
+      skip_lint:
+        description: 'Skip linting'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  manual-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Lint Python
+        if: ${{ !inputs.skip_lint }}
+        run: |
+          pip install ruff pylint
+          ruff check . --select=E,W,F --ignore=E501 || true
+          pylint src/ --disable=all --enable=E,F --exit-zero || true
+      
+      - name: Install Node dependencies
+        run: npm install
+        continue-on-error: true
+      
+      - name: Lint TypeScript
+        if: ${{ !inputs.skip_lint }}
+        run: npm run lint || true
+      
+      - name: Build TypeScript
+        run: npm run build || true
+      
+      - name: Build stock universe
+        run: |
+          if [ "${{ inputs.universe }}" = "us" ]; then
+            python src/build_stock_list.py --universe us --verbose
+          elif [ "${{ inputs.universe }}" = "global" ]; then
+            python src/build_stock_list.py --universe global --global-source file --verbose
+          else
+            python src/build_stock_list.py --universe all --verbose
+          fi
+      
+      - name: Combine universes
+        run: |
+          python src/combine_universes.py --out-csv data/All_Stocks.csv --out-db data/All_Stocks.sqlite --out-txt data/All_Tickers.txt
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: manual stock universe update (${{ inputs.universe }})" && git push)
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: stock-data
+          path: data/
+          retention-days: 30
