@@ -1,0 +1,79 @@
+name: Build & Lint
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  schedule:
+    - cron: '0 2 * * 1'
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint & Build
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt ruff pylint
+      
+      - name: Lint Python
+        run: |
+          ruff check . --select=E,W,F --ignore=E501 || true
+          pylint src/ --disable=all --enable=E,F --exit-zero || true
+      
+      - name: Install Node dependencies
+        run: npm ci
+      
+      - name: Lint TypeScript
+        run: npm run lint || true
+      
+      - name: Build TypeScript
+        run: npm run build || true
+
+  build-universe:
+    runs-on: ubuntu-latest
+    name: Build Stock Universe
+    needs: lint
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Build stock universe
+        run: |
+          python src/build_stock_list.py --universe us --verbose
+          python src/build_stock_list.py --universe global --global-source file --verbose
+          python src/combine_universes.py --out-csv data/All_Stocks.csv --out-db data/All_Stocks.sqlite --out-txt data/All_Tickers.txt
+      
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update stock universe" && git push)
