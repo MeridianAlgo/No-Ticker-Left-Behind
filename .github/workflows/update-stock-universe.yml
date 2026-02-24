@@ -9,68 +9,84 @@ on:
 jobs:
   lint-and-build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-      
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-      
+
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      
+
       - name: Lint Python with ruff
         run: |
           pip install ruff
           ruff check . --select=E,W,F --ignore=E501
         continue-on-error: true
-      
+
       - name: Lint Python with pylint
         run: |
           pip install pylint
           pylint src/ --disable=all --enable=E,F --exit-zero
         continue-on-error: true
-      
+
       - name: Install Node dependencies
         run: npm install
         continue-on-error: true
-      
+
       - name: Lint TypeScript with ESLint
         run: npm run lint
         continue-on-error: true
-      
+
       - name: Build TypeScript
         run: npm run build
         continue-on-error: true
-      
-      - name: Build US stock universe
+
+      - name: Capture previous ticker snapshot
         run: |
-          python src/build_stock_list.py --universe us --verbose
-      
-      - name: Build Global stock universe
+          touch data/All_Tickers.txt
+          cp data/All_Tickers.txt /tmp/previous_tickers.txt
+
+      - name: Refresh global ticker candidates
         run: |
-          python src/build_stock_list.py --universe global --global-source file --verbose
-      
+          python src/build_global_universe.py --out inputs/global_tickers.txt
+
+      - name: Build US stock universe (upsert)
+        run: |
+          python src/build_stock_list.py --universe us --db-mode upsert --verbose
+
+      - name: Build Global stock universe (upsert)
+        run: |
+          python src/build_stock_list.py --universe global --global-source file --db-mode upsert --verbose
+
       - name: Combine universes
         run: |
           python src/combine_universes.py --out-csv data/All_Stocks.csv --out-db data/All_Stocks.sqlite --out-txt data/All_Tickers.txt
-      
+
+      - name: Detect new tickers added this run
+        run: |
+          sort -u /tmp/previous_tickers.txt > /tmp/previous_tickers_sorted.txt
+          sort -u data/All_Tickers.txt > /tmp/current_tickers_sorted.txt
+          comm -13 /tmp/previous_tickers_sorted.txt /tmp/current_tickers_sorted.txt > data/New_Tickers_Weekly.txt
+          echo "new_ticker_count=$(wc -l < data/New_Tickers_Weekly.txt)" >> "$GITHUB_ENV"
+
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add data/
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update stock universe" && git push)
-      
+          git add data/ inputs/global_tickers.txt
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: weekly ticker discovery and stock universe update" && git push)
+
       - name: Create success issue
         if: success()
         uses: actions/github-script@v7
@@ -82,14 +98,14 @@ jobs:
               state: 'open',
               labels: ['stock-universe-failure']
             });
-            
+
             if (issues.data.length > 0) {
               for (const issue of issues.data) {
                 await github.rest.issues.createComment({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: issue.number,
-                  body: '✅ Stock universe build succeeded! Closing this issue.'
+                  body: `✅ Stock universe build succeeded! Newly discovered tickers this week: ${process.env.new_ticker_count || '0'}. Closing this issue.`
                 });
                 await github.rest.issues.update({
                   owner: context.repo.owner,
@@ -99,7 +115,7 @@ jobs:
                 });
               }
             }
-      
+
       - name: Create failure issue
         if: failure()
         uses: actions/github-script@v7
@@ -111,15 +127,13 @@ jobs:
               state: 'open',
               labels: ['stock-universe-failure']
             });
-            
+
             if (issues.data.length === 0) {
               await github.rest.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 title: '❌ Stock Universe Build Failed',
-                body: `The automated stock universe build failed on ${new Date().toISOString()}.
-
-Check the workflow run for details: ${context.server_url}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+                body: `The automated stock universe build failed on ${new Date().toISOString()}.\n\nCheck the workflow run for details: ${context.server_url}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
                 labels: ['stock-universe-failure']
               });
             }
