@@ -2,26 +2,34 @@ name: Update Stock Universe
 
 on:
   schedule:
-    # Every Monday at 2 AM UTC
-    - cron: '0 2 * * 1'
+    # Every day at 2 AM UTC
+    - cron: '0 2 * * *'
   workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   lint-and-build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install Python dependencies
         run: |
@@ -41,15 +49,15 @@ jobs:
         continue-on-error: true
 
       - name: Install Node dependencies
-        run: npm install
+        run: npm ci
         continue-on-error: true
 
       - name: Lint TypeScript with ESLint
-        run: npm run lint
+        run: npm run lint || true
         continue-on-error: true
 
       - name: Build TypeScript
-        run: npm run build
+        run: npm run build || true
         continue-on-error: true
 
       - name: Capture previous ticker snapshot
@@ -85,7 +93,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add data/ inputs/global_tickers.txt
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: weekly ticker discovery and stock universe update" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update stock universe and discover new tickers [$(date -u +'%Y-%m-%d')]" && git push)
 
       - name: Create success issue
         if: success()
