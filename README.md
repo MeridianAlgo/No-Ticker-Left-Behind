@@ -83,10 +83,11 @@ You can run using the venv interpreter directly:
 ## GitHub Actions
 
 A weekly workflow (every Monday at 2 AM UTC) automatically:
+- Refreshes `inputs/global_tickers.txt` to discover newly listed symbols
 - Fetches the latest stock data from free APIs (Yahoo Finance, NASDAQ Trader)
-- Lints Python code with ruff and pylint
-- Builds US and Global universes
+- Builds US and Global universes in upsert mode so new tickers are added to the database
 - Combines them into a single comprehensive dataset
+- Writes `data/New_Tickers_Weekly.txt` with only the symbols discovered in that run
 - Commits updated files back to the repository
 - Creates GitHub issues if the build fails
 - Auto-closes issues when the build succeeds
