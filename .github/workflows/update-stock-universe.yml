@@ -93,7 +93,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add data/ inputs/global_tickers.txt
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update stock universe and discover new tickers [$(date -u +'%Y-%m-%d')]" && git pull --rebase origin master && git push origin HEAD:master)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update stock universe and discover new tickers [$(date -u +'%Y-%m-%d')]" && git pull --rebase origin main && git push origin HEAD:main)
 
       - name: Create success issue
         if: success()
