@@ -1,5 +1,3 @@
-# Combined US and Global stock universe
-# Total: 5441 unique tickers
 AACB
 AACBR
 AACBU
@@ -3239,6 +3237,7 @@ MYSEW
 MYSZ
 MYXXU
 MZTI
+NA
 NAAS
 NAGE
 NAII

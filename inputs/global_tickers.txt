@@ -1,0 +1,2 @@
+# Auto-generated global ticker universe (Yahoo Finance symbols)
+# Edit sources under inputs/global_sources/ and re-run this script.
