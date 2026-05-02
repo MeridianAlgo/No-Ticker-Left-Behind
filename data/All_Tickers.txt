@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5441 unique tickers
+# Total: 5447 unique tickers
 AACB
 AACBR
 AACBU
@@ -256,6 +256,7 @@ ALVO
 ALVOW
 ALXO
 ALZN
+AMA
 AMAL
 AMAT
 AMBA
@@ -1100,6 +1101,7 @@ CNTY
 CNVS
 CNXC
 CNXN
+COAG
 COCH
 COCHW
 COCO
@@ -1460,6 +1462,9 @@ DYAI
 DYFI
 DYN
 DYNB
+DYNC
+DYNCU
+DYNCW
 DYOR
 DYORU
 DYORW
@@ -4523,6 +4528,7 @@ SPRX
 SPRY
 SPSC
 SPT
+SPTX
 SPWH
 SPWR
 SPWRW
