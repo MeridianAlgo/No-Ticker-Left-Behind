@@ -1,7 +1,0 @@
-# Total: 5447 unique tickers
-AMA
-COAG
-DYNC
-DYNCU
-DYNCW
-SPTX
