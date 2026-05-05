@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5447 unique tickers
+# Total: 5448 unique tickers
 AACB
 AACBR
 AACBU
@@ -499,6 +499,7 @@ AXON
 AXPG
 AXSM
 AXTI
+AYA
 AYTU
 AZ
 AZI
