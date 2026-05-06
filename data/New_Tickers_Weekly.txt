@@ -1,2 +1,10 @@
-# Total: 5448 unique tickers
-AYA
+# Total: 5457 unique tickers
+BIOY
+CHRN
+DINE
+FINY
+FIYY
+LQ
+PONO
+PONOR
+TECY
