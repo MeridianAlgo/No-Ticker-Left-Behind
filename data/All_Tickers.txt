@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5457 unique tickers
+# Total: 5458 unique tickers
 AACB
 AACBR
 AACBU
@@ -1432,6 +1432,7 @@ DUO
 DUOG
 DUOL
 DUOT
+DUSG
 DVAL
 DVGR
 DVIN
