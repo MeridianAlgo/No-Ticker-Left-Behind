@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5458 unique tickers
+# Total: 5461 unique tickers
 AACB
 AACBR
 AACBU
@@ -4616,6 +4616,7 @@ STX
 SUGP
 SUIG
 SUIS
+SUJA
 SUMA
 SUMAR
 SUMAU
@@ -4708,6 +4709,7 @@ TBLD
 TBPH
 TBRG
 TC
+TCAN
 TCBI
 TCBIO
 TCBK
@@ -5197,6 +5199,7 @@ WAI
 WALD
 WALDW
 WAMA
+WARP
 WASH
 WATT
 WAVE

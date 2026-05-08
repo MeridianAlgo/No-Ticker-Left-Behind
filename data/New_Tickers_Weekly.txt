@@ -1,2 +1,4 @@
-# Total: 5458 unique tickers
-DUSG
+# Total: 5461 unique tickers
+SUJA
+TCAN
+WARP
