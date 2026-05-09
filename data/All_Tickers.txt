@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5461 unique tickers
+# Total: 5465 unique tickers
 AACB
 AACBR
 AACBU
@@ -159,6 +159,7 @@ AGNCO
 AGNCP
 AGNCZ
 AGNG
+AGNT
 AGPU
 AGRZ
 AGYS
@@ -2857,6 +2858,7 @@ LIVE
 LIVN
 LIXT
 LKFN
+LKFT
 LKQ
 LKSP
 LKSPR
@@ -3140,6 +3142,7 @@ MNYWW
 MNZL
 MOB
 MOBBW
+MOBI
 MOBX
 MOBXW
 MODD
@@ -3511,6 +3514,7 @@ ODD
 ODDS
 ODFL
 ODTE
+ODTX
 ODVWZ
 ODYS
 OESX
