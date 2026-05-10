@@ -1,5 +1,0 @@
-# Total: 5465 unique tickers
-AGNT
-LKFT
-MOBI
-ODTX
