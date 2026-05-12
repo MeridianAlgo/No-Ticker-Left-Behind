@@ -1,0 +1,5 @@
+# Total: 5469 unique tickers
+BOT
+BRUN
+BRUNW
+WSE

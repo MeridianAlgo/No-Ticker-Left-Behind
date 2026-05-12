@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5465 unique tickers
+# Total: 5469 unique tickers
 AACB
 AACBR
 AACBU
@@ -721,6 +721,7 @@ BOLT
 BON
 BOOM
 BOSC
+BOT
 BOTJ
 BOTT
 BOTZ
@@ -757,6 +758,8 @@ BRRR
 BRRWW
 BRTR
 BRTX
+BRUN
+BRUNW
 BRZE
 BSAA
 BSAAR
@@ -5283,6 +5286,7 @@ WSBCO
 WSBF
 WSBK
 WSC
+WSE
 WSFS
 WSGE
 WSHP
