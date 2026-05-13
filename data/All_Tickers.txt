@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5469 unique tickers
+# Total: 5472 unique tickers
 AACB
 AACBR
 AACBU
@@ -427,6 +427,7 @@ ASUR
 ASYS
 ATAI
 ATAT
+ATC
 ATCX
 ATEC
 ATER
@@ -4033,6 +4034,7 @@ QUMSR
 QUMSU
 QURE
 QVAL
+QVOL
 QXL
 QXQ
 QYLD
@@ -4775,6 +4777,7 @@ THRM
 THRV
 THRY
 THYM
+THYP
 TIGO
 TIGR
 TIL

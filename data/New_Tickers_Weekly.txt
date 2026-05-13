@@ -1,5 +1,4 @@
-# Total: 5469 unique tickers
-BOT
-BRUN
-BRUNW
-WSE
+# Total: 5472 unique tickers
+ATC
+QVOL
+THYP
