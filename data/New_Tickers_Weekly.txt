@@ -1,5 +1,12 @@
-# Total: 5505 unique tickers
-AHD
-AMAN
-HIS
-PLA
+# Total: 5516 unique tickers
+AMSS
+BFLX
+EMEM
+OPTH
+QADR
+QADRW
+QTEX
+QTEXW
+RACC
+RREV
+RREVW
