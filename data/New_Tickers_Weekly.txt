@@ -1,12 +1,8 @@
-# Total: 5516 unique tickers
-AMSS
-BFLX
-EMEM
-OPTH
-QADR
-QADRW
-QTEX
-QTEXW
-RACC
-RREV
-RREVW
+# Total: 5523 unique tickers
+APURU
+CNXU
+EMSC
+FBYDP
+GIEQ
+OCTVV
+OHACU
