@@ -1,4 +1,0 @@
-# Total: 5526 unique tickers
-BRKHU
-FXACU
-PECEU
