@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5526 unique tickers
+# Total: 5528 unique tickers
 AACB
 AACBR
 AACBU
@@ -2243,6 +2243,8 @@ HCSG
 HCTI
 HCWB
 HDL
+HDRN
+HDRNW
 HDSN
 HEAL
 HECO

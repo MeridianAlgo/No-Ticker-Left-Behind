@@ -1,0 +1,3 @@
+# Total: 5528 unique tickers
+HDRN
+HDRNW
