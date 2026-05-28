@@ -1,3 +1,8 @@
-# Total: 5528 unique tickers
-HDRN
-HDRNW
+# Total: 5535 unique tickers
+AIFA
+CCAQ
+CCAQU
+CCAQW
+MRA
+PWRL
+SCA

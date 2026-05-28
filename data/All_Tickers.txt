@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5528 unique tickers
+# Total: 5535 unique tickers
 AACB
 AACBR
 AACBU
@@ -171,6 +171,7 @@ AHMA
 AIA
 AIAI
 AIDX
+AIFA
 AIFC
 AIFD
 AIFF
@@ -915,6 +916,9 @@ CBRS
 CBSH
 CBUS
 CCAP
+CCAQ
+CCAQU
+CCAQW
 CCB
 CCBG
 CCC
@@ -3196,6 +3200,7 @@ MPLT
 MPWR
 MQ
 MQQQ
+MRA
 MRAL
 MRAM
 MRBK
@@ -3981,6 +3986,7 @@ PUSA
 PVLA
 PWP
 PWRD
+PWRL
 PXI
 PXLW
 PXS
@@ -4346,6 +4352,7 @@ SBLK
 SBRA
 SBU
 SBUX
+SCA
 SCAG
 SCAGW
 SCDS
