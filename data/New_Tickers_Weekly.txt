@@ -1,8 +1,12 @@
-# Total: 5535 unique tickers
-AIFA
-CCAQ
-CCAQU
-CCAQW
-MRA
-PWRL
-SCA
+# Total: 5546 unique tickers
+AACP
+AACPR
+AACPW
+ACGC
+ACGCW
+ASEC
+JPFP
+OCTV
+RKTO
+SKYA
+SKYAW
