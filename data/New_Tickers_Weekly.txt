@@ -1,12 +1,9 @@
-# Total: 5546 unique tickers
-AACP
-AACPR
-AACPW
-ACGC
-ACGCW
-ASEC
-JPFP
-OCTV
-RKTO
-SKYA
-SKYAW
+# Total: 5554 unique tickers
+ARCL
+ARCLR
+ARCLW
+BIDWU
+ISTM
+PTN
+QH
+VBNB
