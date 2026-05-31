@@ -1,9 +1,0 @@
-# Total: 5554 unique tickers
-ARCL
-ARCLR
-ARCLW
-BIDWU
-ISTM
-PTN
-QH
-VBNB
