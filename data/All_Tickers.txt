@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5554 unique tickers
+# Total: 5561 unique tickers
 AACB
 AACBR
 AACBU
@@ -414,6 +414,7 @@ ARXS
 ASBP
 ASBPW
 ASCI
+ASD
 ASEC
 ASLE
 ASMB
@@ -624,7 +625,9 @@ BFRI
 BFRIW
 BFST
 BGC
+BGCG
 BGDE
+BGGG
 BGIN
 BGL
 BGLC
@@ -1881,6 +1884,7 @@ FNWB
 FNWD
 FNX
 FNY
+FOCL
 FOFO
 FONR
 FORA
@@ -2895,6 +2899,9 @@ LIF
 LIFE
 LILA
 LILAK
+LILAV
+LILKV
+LILPV
 LIMN
 LIMNW
 LIN
