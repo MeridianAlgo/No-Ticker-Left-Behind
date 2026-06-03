@@ -1,8 +1,0 @@
-# Total: 5561 unique tickers
-ASD
-BGCG
-BGGG
-FOCL
-LILAV
-LILKV
-LILPV
