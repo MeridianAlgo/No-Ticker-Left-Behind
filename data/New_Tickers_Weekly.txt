@@ -1,0 +1,10 @@
+# Total: 5570 unique tickers
+AESPU
+APMCU
+BGEG
+BGIA
+HYPG
+KEYYU
+PBK
+TRUI
+TRUO
