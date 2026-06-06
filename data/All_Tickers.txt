@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5579 unique tickers
+# Total: 5581 unique tickers
 AACB
 AACBR
 AACBU
@@ -3603,6 +3603,8 @@ OFS
 OFSSH
 OFSSO
 OGI
+OHAC
+OHACR
 OHACU
 OIM
 OIMAU
