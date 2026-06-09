@@ -1,0 +1,10 @@
+# Total: 5590 unique tickers
+AQLG
+BSIN
+FAC
+FACWW
+FRTT
+GOOGM
+GOOGN
+NHIV
+NHIVW
