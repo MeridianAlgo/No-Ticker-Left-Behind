@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5608 unique tickers
+# Total: 5615 unique tickers
 AACB
 AACBR
 AACBU
@@ -491,6 +491,7 @@ AUROW
 AUTL
 AUUD
 AVAH
+AVAT
 AVAV
 AVBH
 AVBP
@@ -773,6 +774,8 @@ BRBI
 BRCB
 BREM
 BRES
+BREZ
+BREZR
 BREZU
 BRFH
 BRHY
@@ -1923,6 +1926,7 @@ FPXE
 FPXI
 FRAF
 FRBA
+FRBT
 FRD
 FRGT
 FRHC
@@ -4499,6 +4503,7 @@ SGMT
 SGP
 SGRP
 SGRY
+SGVA
 SHAZ
 SHBI
 SHC
@@ -5300,6 +5305,8 @@ VRSK
 VRSN
 VRTL
 VRTX
+VRXA
+VRXAW
 VS
 VSA
 VSAT
