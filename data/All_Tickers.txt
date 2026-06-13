@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5615 unique tickers
+# Total: 5617 unique tickers
 AACB
 AACBR
 AACBU
@@ -4515,6 +4515,7 @@ SHIP
 SHLS
 SHMD
 SHMDW
+SHOE
 SHOO
 SHOP
 SHOTU
@@ -4663,6 +4664,7 @@ SPBC
 SPCB
 SPCK
 SPCT
+SPCX
 SPEG
 SPEGR
 SPEGU
