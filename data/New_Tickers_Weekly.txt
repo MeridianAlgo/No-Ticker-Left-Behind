@@ -1,3 +1,0 @@
-# Total: 5617 unique tickers
-SHOE
-SPCX
