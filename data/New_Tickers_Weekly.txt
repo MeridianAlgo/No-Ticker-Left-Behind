@@ -1,7 +1,7 @@
-# Total: 5623 unique tickers
-CSEN
-HONAV
-HONIV
-SLBT
-TILC
-TISC
+# Total: 5629 unique tickers
+BITA
+FLZH
+FTH
+SMCIP
+XSPC
+YICCU
