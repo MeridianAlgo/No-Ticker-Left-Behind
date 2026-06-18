@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5629 unique tickers
+# Total: 5634 unique tickers
 AACB
 AACBR
 AACBU
@@ -903,6 +903,7 @@ CAC
 CACC
 CADL
 CAEP
+CAES
 CAFG
 CAI
 CAIIU
@@ -1324,7 +1325,9 @@ CWY
 CXAI
 CXAIW
 CXDO
+CXII
 CXIIU
+CXIIW
 CXSE
 CYAB
 CYCN
@@ -2748,6 +2751,7 @@ KALU
 KALV
 KARO
 KAT
+KAZR
 KBAB
 KBDU
 KBON
@@ -2941,6 +2945,7 @@ LIF
 LIFE
 LILA
 LILAK
+LILAP
 LILAV
 LILKV
 LILPV

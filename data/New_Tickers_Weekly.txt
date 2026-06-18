@@ -1,7 +1,6 @@
-# Total: 5629 unique tickers
-BITA
-FLZH
-FTH
-SMCIP
-XSPC
-YICCU
+# Total: 5634 unique tickers
+CAES
+CXII
+CXIIW
+KAZR
+LILAP
