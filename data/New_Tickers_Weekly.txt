@@ -1,6 +1,13 @@
-# Total: 5634 unique tickers
-CAES
-CXII
-CXIIW
-KAZR
-LILAP
+# Total: 5646 unique tickers
+FIMU
+FISN
+FREI
+FSTB
+IACQ
+IACQW
+KARD
+NUIF
+NVPS
+OPI
+TVIVU
+WLCOU
