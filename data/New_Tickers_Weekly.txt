@@ -1,0 +1,12 @@
+# Total: 5657 unique tickers
+CAII
+CAIIW
+FTHA
+FTHAW
+GCGR
+GCGRW
+HAPN
+KEYY
+KEYYW
+MCAH
+MCAHR
