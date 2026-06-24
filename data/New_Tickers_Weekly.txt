@@ -1,12 +1,6 @@
-# Total: 5657 unique tickers
-CAII
-CAIIW
-FTHA
-FTHAW
-GCGR
-GCGRW
-HAPN
-KEYY
-KEYYW
-MCAH
-MCAHR
+# Total: 5662 unique tickers
+AAAP
+GHXIU
+PBSC
+TMS
+TMSWW
