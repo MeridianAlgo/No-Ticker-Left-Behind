@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5662 unique tickers
+# Total: 5668 unique tickers
 AAAP
 AACB
 AACBR
@@ -281,7 +281,10 @@ AMD
 AMDD
 AMDG
 AMDL
+AMEI
+AMEM
 AMGN
+AMGR
 AMID
 AMIX
 AMKR
@@ -1547,6 +1550,7 @@ EBIZ
 EBMT
 EBON
 ECBK
+ECHO
 ECOR
 ECOW
 ECPG
@@ -4136,6 +4140,7 @@ QMID
 QMMM
 QMOM
 QNCX
+QNDX
 QNRX
 QNST
 QNT
@@ -4628,6 +4633,7 @@ SMCO
 SMCX
 SMCZ
 SMH
+SMHC
 SMHX
 SMID
 SMMT
