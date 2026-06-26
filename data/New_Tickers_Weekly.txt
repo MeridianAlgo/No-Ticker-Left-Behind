@@ -1,7 +1,6 @@
-# Total: 5668 unique tickers
-AMEI
-AMEM
-AMGR
-ECHO
-QNDX
-SMHC
+# Total: 5673 unique tickers
+AIX
+ALPXU
+CGCFU
+DSC
+FWACU
