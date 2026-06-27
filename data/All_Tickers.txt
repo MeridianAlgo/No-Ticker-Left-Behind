@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5673 unique tickers
+# Total: 5677 unique tickers
 AAAP
 AACB
 AACBR
@@ -3206,6 +3206,7 @@ MFIG
 MFIN
 MFLX
 MFMO
+MFPVV
 MFVL
 MGEE
 MGIH
@@ -3220,6 +3221,7 @@ MGTX
 MGX
 MGYR
 MIDD
+MIDDV
 MILN
 MIMI
 MIND
@@ -5211,6 +5213,8 @@ USAR
 USAU
 USCB
 USCL
+USDE
+USDEW
 USDX
 USEA
 USEG
