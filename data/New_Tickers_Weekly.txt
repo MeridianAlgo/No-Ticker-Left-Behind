@@ -1,5 +1,0 @@
-# Total: 5677 unique tickers
-MFPVV
-MIDDV
-USDE
-USDEW
