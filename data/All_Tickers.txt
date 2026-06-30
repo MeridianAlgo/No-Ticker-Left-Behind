@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5677 unique tickers
+# Total: 5680 unique tickers
 AAAP
 AACB
 AACBR
@@ -356,6 +356,8 @@ APLM
 APLMW
 APLS
 APM
+APMC
+APMCR
 APMCU
 APOG
 APP
@@ -2371,6 +2373,7 @@ HOFT
 HOLO
 HOLOW
 HON
+HONA
 HONAV
 HONIV
 HOOD

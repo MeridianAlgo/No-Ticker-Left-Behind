@@ -1,0 +1,4 @@
+# Total: 5680 unique tickers
+APMC
+APMCR
+HONA
