@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5680 unique tickers
+# Total: 5681 unique tickers
 AAAP
 AACB
 AACBR
@@ -2182,6 +2182,7 @@ GO
 GOAI
 GOCO
 GOGO
+GOLI
 GOOD
 GOODN
 GOODO

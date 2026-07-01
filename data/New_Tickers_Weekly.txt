@@ -1,4 +1,2 @@
-# Total: 5680 unique tickers
-APMC
-APMCR
-HONA
+# Total: 5681 unique tickers
+GOLI
