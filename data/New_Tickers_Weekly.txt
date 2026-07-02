@@ -1,2 +1,12 @@
-# Total: 5681 unique tickers
-GOLI
+# Total: 5692 unique tickers
+AESP
+AESPR
+AESPW
+BSP
+ECHX
+HODO
+ITG
+LIME
+NSLR
+NSLRL
+OSPRU
