@@ -1,12 +1,9 @@
-# Total: 5692 unique tickers
-AESP
-AESPR
-AESPW
-BSP
-ECHX
-HODO
-ITG
-LIME
-NSLR
-NSLRL
-OSPRU
+# Total: 5700 unique tickers
+CIRC
+FXHO
+GSRV
+GSRVR
+IQMX
+IQMXW
+MIACU
+VCRE
