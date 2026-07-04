@@ -1,9 +1,0 @@
-# Total: 5700 unique tickers
-CIRC
-FXHO
-GSRV
-GSRVR
-IQMX
-IQMXW
-MIACU
-VCRE
