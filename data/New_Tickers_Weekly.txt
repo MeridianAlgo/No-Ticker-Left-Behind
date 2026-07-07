@@ -1,0 +1,9 @@
+# Total: 5708 unique tickers
+EOSER
+GUAC
+GUACW
+IDAC
+IDACW
+NMAD
+PTAC
+PTACW
