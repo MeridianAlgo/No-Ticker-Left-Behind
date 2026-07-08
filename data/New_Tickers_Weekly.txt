@@ -1,9 +1,10 @@
-# Total: 5708 unique tickers
-EOSER
-GUAC
-GUACW
-IDAC
-IDACW
-NMAD
-PTAC
-PTACW
+# Total: 5717 unique tickers
+ALPX
+ALPXR
+ALPXW
+BBUL
+BCCQU
+FXAC
+FXACW
+MFP
+PUL
