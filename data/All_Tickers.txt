@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5717 unique tickers
+# Total: 5724 unique tickers
 AAAP
 AACB
 AACBR
@@ -1036,6 +1036,7 @@ CENTA
 CENX
 CEPF
 CEPI
+CEPL
 CEPO
 CEPS
 CEPT
@@ -1814,6 +1815,7 @@ FDIF
 FDIG
 FDIQ
 FDIV
+FDMMU
 FDMT
 FDNI
 FDRS
@@ -4134,6 +4136,7 @@ PUBM
 PUI
 PUL
 PULM
+PUR
 PURR
 PUSA
 PVLA
@@ -5108,9 +5111,13 @@ TRUF
 TRUG
 TRUH
 TRUI
+TRUM
+TRUN
 TRUO
 TRUP
+TRUR
 TRUT
+TRUU
 TRVG
 TRVI
 TSAT

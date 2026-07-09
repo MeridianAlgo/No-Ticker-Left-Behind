@@ -1,10 +1,8 @@
-# Total: 5717 unique tickers
-ALPX
-ALPXR
-ALPXW
-BBUL
-BCCQU
-FXAC
-FXACW
-MFP
-PUL
+# Total: 5724 unique tickers
+CEPL
+FDMMU
+PUR
+TRUM
+TRUN
+TRUR
+TRUU
