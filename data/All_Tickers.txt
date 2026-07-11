@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5729 unique tickers
+# Total: 5730 unique tickers
 AAAP
 AACB
 AACBR
@@ -4637,6 +4637,7 @@ SJ
 SJCP
 SJLD
 SKBL
+SKHYV
 SKIN
 SKK
 SKOR

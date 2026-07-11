@@ -1,6 +1,2 @@
-# Total: 5729 unique tickers
-CCCTU
-IQQ
-MRCOU
-PMA
-WSPC
+# Total: 5730 unique tickers
+SKHYV
