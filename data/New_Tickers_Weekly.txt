@@ -1,0 +1,11 @@
+# Total: 5740 unique tickers
+AZIO
+GFUZ
+GFUZW
+LGDS
+RACD
+SKHY
+TVIV
+TVIVW
+YICC
+YICCW
