@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5752 unique tickers
+# Total: 5754 unique tickers
 AAAP
 AACB
 AACBR
@@ -1475,6 +1475,7 @@ DORM
 DOX
 DOYU
 DPRO
+DPU
 DPZ
 DRCT
 DRDB
@@ -4200,6 +4201,7 @@ QLDY
 QLYS
 QMCO
 QMID
+QMLS
 QMMM
 QMOM
 QNCX
