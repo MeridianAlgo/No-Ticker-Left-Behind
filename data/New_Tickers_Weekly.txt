@@ -1,3 +1,4 @@
-# Total: 5754 unique tickers
-DPU
-QMLS
+# Total: 5757 unique tickers
+AMACU
+SHOT
+SHOTR

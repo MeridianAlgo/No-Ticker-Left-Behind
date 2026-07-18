@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5754 unique tickers
+# Total: 5757 unique tickers
 AAAP
 AACB
 AACBR
@@ -278,6 +278,7 @@ ALVOW
 ALXO
 ALZN
 AMA
+AMACU
 AMAL
 AMAN
 AMAT
@@ -4625,6 +4626,8 @@ SHMDW
 SHOE
 SHOO
 SHOP
+SHOT
+SHOTR
 SHOTU
 SHPH
 SHPU
