@@ -1,4 +1,0 @@
-# Total: 5757 unique tickers
-AMACU
-SHOT
-SHOTR
