@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5764 unique tickers
+# Total: 5769 unique tickers
 AAAP
 AACB
 AACBR
@@ -815,6 +815,7 @@ BRNY
 BRR
 BRRR
 BRRWW
+BRTMU
 BRTR
 BRTX
 BRUN
@@ -1118,6 +1119,7 @@ CIBR
 CIFG
 CIFR
 CIGI
+CIGL
 CIIT
 CINF
 CING
@@ -1981,6 +1983,7 @@ FRME
 FRMEP
 FRMI
 FRMM
+FRNM
 FROG
 FRPH
 FRPT
@@ -2393,6 +2396,7 @@ HLIT
 HLMN
 HLNE
 HLP
+HLTH
 HLXC
 HMH
 HMR
@@ -3487,6 +3491,7 @@ NCIQ
 NCMI
 NCNA
 NCNO
+NCOOU
 NCPB
 NCPL
 NCPLW
