@@ -1,6 +1,7 @@
-# Total: 5769 unique tickers
-BRTMU
-CIGL
-FRNM
-HLTH
-NCOOU
+# Total: 5775 unique tickers
+CHGA
+CPTL
+HWIV
+HWO
+MEDS
+PWCM
