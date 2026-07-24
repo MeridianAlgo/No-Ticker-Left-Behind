@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5775 unique tickers
+# Total: 5782 unique tickers
 AAAP
 AACB
 AACBR
@@ -28,6 +28,7 @@ AAPG
 AAPL
 AAPU
 AARD
+AAUB
 AAUS
 AAVM
 AAXJ
@@ -928,6 +929,7 @@ CABR
 CAC
 CACC
 CADL
+CAE
 CAEP
 CAES
 CAFG
@@ -1687,6 +1689,7 @@ EPSN
 EQ
 EQIX
 EQPT
+EQQQ
 EQRR
 ERAS
 ERET
@@ -2264,6 +2267,7 @@ GROW
 GRPN
 GRRR
 GRRRW
+GRSD
 GRVY
 GRW
 GRWG
@@ -5418,6 +5422,9 @@ VIVO
 VIVS
 VKTX
 VLGEA
+VLOS
+VLOSU
+VLOSW
 VLY
 VLYPN
 VLYPO

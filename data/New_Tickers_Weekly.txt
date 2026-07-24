@@ -1,7 +1,8 @@
-# Total: 5775 unique tickers
-CHGA
-CPTL
-HWIV
-HWO
-MEDS
-PWCM
+# Total: 5782 unique tickers
+AAUB
+CAE
+EQQQ
+GRSD
+VLOS
+VLOSU
+VLOSW
