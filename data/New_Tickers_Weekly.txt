@@ -1,8 +1,7 @@
-# Total: 5782 unique tickers
-AAUB
-CAE
-EQQQ
-GRSD
-VLOS
-VLOSU
-VLOSW
+# Total: 5788 unique tickers
+BIOT
+BIOTW
+MTAKU
+PLCIU
+SCTX
+VIP
