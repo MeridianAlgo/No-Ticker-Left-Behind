@@ -1,0 +1,5 @@
+# Total: 5792 unique tickers
+IPVV
+IPVVW
+LTGRW
+QBTS

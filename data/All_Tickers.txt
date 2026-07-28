@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5788 unique tickers
+# Total: 5792 unique tickers
 AAAP
 AACB
 AACBR
@@ -2711,7 +2711,9 @@ IPODU
 IPODW
 IPSC
 IPST
+IPVV
 IPVVU
+IPVVW
 IPW
 IPWR
 IPX
@@ -3125,6 +3127,7 @@ LSTR
 LTBR
 LTCC
 LTGRU
+LTGRW
 LTRN
 LTRX
 LTRYW
@@ -4202,6 +4205,7 @@ QALT
 QAT
 QB
 QBIG
+QBTS
 QBTZ
 QBUF
 QBY
