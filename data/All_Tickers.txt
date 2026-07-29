@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5792 unique tickers
+# Total: 5797 unique tickers
 AAAP
 AACB
 AACBR
@@ -664,6 +664,7 @@ BGM
 BGMS
 BGRN
 BGRO
+BGUS
 BHAV
 BHAVR
 BHAVU
@@ -969,6 +970,7 @@ CASS
 CAST
 CASY
 CATH
+CATLU
 CATY
 CBAT
 CBC
@@ -2682,6 +2684,7 @@ INV
 INVA
 INVE
 INVZ
+IOND
 IONL
 IONR
 IONS
@@ -3126,6 +3129,7 @@ LSTA
 LSTR
 LTBR
 LTCC
+LTGR
 LTGRU
 LTGRW
 LTRN
@@ -5703,6 +5707,7 @@ XXII
 XXX
 XYZG
 YAAS
+YARW
 YB
 YBMN
 YBST

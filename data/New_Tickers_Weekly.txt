@@ -1,5 +1,6 @@
-# Total: 5792 unique tickers
-IPVV
-IPVVW
-LTGRW
-QBTS
+# Total: 5797 unique tickers
+BGUS
+CATLU
+IOND
+LTGR
+YARW
