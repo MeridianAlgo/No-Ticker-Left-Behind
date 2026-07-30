@@ -1,6 +1,0 @@
-# Total: 5797 unique tickers
-BGUS
-CATLU
-IOND
-LTGR
-YARW
