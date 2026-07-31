@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5797 unique tickers
+# Total: 5802 unique tickers
 AAAP
 AACB
 AACBR
@@ -1639,6 +1639,7 @@ ELFY
 ELIL
 ELMT
 ELOG
+ELOL
 ELOX
 ELPW
 ELSE
@@ -2324,6 +2325,7 @@ GWAV
 GWRS
 GXAI
 GXDW
+GYGY
 GYRE
 GYRO
 HACQ
@@ -2741,7 +2743,9 @@ IRWD
 ISBA
 ISHG
 ISHP
+ISNR
 ISNRU
+ISNRW
 ISPC
 ISPR
 ISRG
@@ -3924,6 +3928,7 @@ PAYO
 PAYP
 PAYS
 PAYX
+PBAM
 PBEU
 PBFS
 PBHC
