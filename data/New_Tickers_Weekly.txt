@@ -1,6 +1,13 @@
-# Total: 5802 unique tickers
-ELOL
-GYGY
-ISNR
-ISNRW
-PBAM
+# Total: 5814 unique tickers
+APMD
+CCCT
+CCCTW
+EWAVU
+FWAC
+FWACR
+FWACW
+JLVP
+NCO
+NCOOR
+NCOOW
+XIIIU
