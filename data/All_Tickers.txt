@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5922 unique tickers
+# Total: 5924 unique tickers
 AAAP
 AACB
 AACBR
@@ -2870,6 +2870,8 @@ JLHL
 JLVP
 JMID
 JMSB
+JONE
+JONER
 JONEU
 JOUT
 JOYT
