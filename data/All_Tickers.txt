@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5924 unique tickers
+# Total: 5926 unique tickers
 AAAP
 AACB
 AACBR
@@ -2490,6 +2490,7 @@ HPAI
 HPAIW
 HPK
 HQ
+HQDG
 HQGO
 HQI
 HQWWW
@@ -4746,6 +4747,7 @@ SGMO
 SGMT
 SGP
 SGRP
+SGRX
 SGRY
 SGVA
 SHAZ

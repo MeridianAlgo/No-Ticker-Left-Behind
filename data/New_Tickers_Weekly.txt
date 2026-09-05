@@ -1,3 +1,3 @@
-# Total: 5924 unique tickers
-JONE
-JONER
+# Total: 5926 unique tickers
+HQDG
+SGRX
