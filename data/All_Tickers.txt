@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5926 unique tickers
+# Total: 5929 unique tickers
 AAAP
 AACB
 AACBR
@@ -285,7 +285,9 @@ ALVOW
 ALXO
 ALZN
 AMA
+AMAC
 AMACU
+AMACW
 AMAL
 AMAN
 AMAT
@@ -1110,6 +1112,7 @@ CGPT
 CGTL
 CGTX
 CHA
+CHAD
 CHAI
 CHAR
 CHARR
