@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5929 unique tickers
+# Total: 5934 unique tickers
 AAAP
 AACB
 AACBR
@@ -1032,6 +1032,7 @@ CCIXU
 CCIXW
 CCLD
 CCLDO
+CCML
 CCNE
 CCNEP
 CCNR
@@ -2989,6 +2990,7 @@ KRNY
 KROP
 KROS
 KRRO
+KRSA
 KRT
 KRUS
 KRYS
@@ -3782,6 +3784,8 @@ NWPX
 NWS
 NWSA
 NWTG
+NXAT
+NXATW
 NXGL
 NXGLW
 NXH
@@ -4544,6 +4548,7 @@ RMCF
 RMCO
 RMCOW
 RMIX
+RML
 RMNI
 RMR
 RMSG
