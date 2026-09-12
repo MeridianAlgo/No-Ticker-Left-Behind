@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5945 unique tickers
+# Total: 5949 unique tickers
 AAAP
 AACB
 AACBR
@@ -2191,6 +2191,7 @@ GELS
 GEME
 GEMG
 GEMI
+GEMQ
 GEN
 GENB
 GENK
@@ -3834,7 +3835,10 @@ OCCIN
 OCFC
 OCG
 OCGN
+OCLT
+OCLTR
 OCLTU
+OCLTW
 OCS
 OCSAW
 OCSL

@@ -1,12 +1,5 @@
-# Total: 5945 unique tickers
-ACBE
-ACBH
-AIFR
-AIMG
-ATTT
-BRTM
-BRTMW
-CRAM
-EOCN
-SWRD
-VEEM
+# Total: 5949 unique tickers
+GEMQ
+OCLT
+OCLTR
+OCLTW
