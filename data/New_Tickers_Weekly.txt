@@ -1,5 +1,0 @@
-# Total: 5949 unique tickers
-GEMQ
-OCLT
-OCLTR
-OCLTW
