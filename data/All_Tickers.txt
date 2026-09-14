@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5949 unique tickers
+# Total: 5951 unique tickers
 AAAP
 AACB
 AACBR
@@ -149,6 +149,8 @@ AEVA
 AEYE
 AFBI
 AFCG
+AFDM
+AFEM
 AFJK
 AFJKR
 AFJKU

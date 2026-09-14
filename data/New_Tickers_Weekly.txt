@@ -1,0 +1,3 @@
+# Total: 5951 unique tickers
+AFDM
+AFEM
