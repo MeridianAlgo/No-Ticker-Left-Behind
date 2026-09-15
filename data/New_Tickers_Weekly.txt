@@ -1,3 +1,2 @@
-# Total: 5951 unique tickers
-AFDM
-AFEM
+# Total: 5952 unique tickers
+NFEGP

@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5951 unique tickers
+# Total: 5952 unique tickers
 AAAP
 AACB
 AACBR
@@ -3642,6 +3642,7 @@ NEXRW
 NEXT
 NFBK
 NFE
+NFEGP
 NFLX
 NFRX
 NFTY
