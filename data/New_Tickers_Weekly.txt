@@ -1,5 +1,7 @@
-# Total: 5956 unique tickers
-NUIB
-RNAQ
-RNAQW
-XUSM
+# Total: 5962 unique tickers
+AICH
+BSMA
+IQGR
+JINT
+TRT
+WCCB
