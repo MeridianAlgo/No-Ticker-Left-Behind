@@ -1,7 +1,11 @@
-# Total: 5962 unique tickers
-AICH
-BSMA
-IQGR
-JINT
-TRT
-WCCB
+# Total: 5972 unique tickers
+CATL
+CATLR
+DRK
+MTAK
+MTAKW
+TDNA
+TLAC
+TLACW
+TMID
+TSEE
