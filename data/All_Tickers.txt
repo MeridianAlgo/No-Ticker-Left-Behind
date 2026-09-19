@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5972 unique tickers
+# Total: 5977 unique tickers
 AAAP
 AACB
 AACBR
@@ -1781,6 +1781,7 @@ ETHMU
 ETHMW
 ETON
 ETOR
+ETRA
 ETRL
 ETS
 EU
@@ -3082,6 +3083,7 @@ LDRX
 LDSF
 LE
 LECO
+LEDRU
 LEDS
 LEE
 LEGH
@@ -3877,6 +3879,7 @@ OGI
 OHAC
 OHACR
 OHACU
+OIG
 OIM
 OIMAU
 OIMAW
@@ -5830,7 +5833,9 @@ XFOR
 XGN
 XHG
 XHLD
+XIII
 XIIIU
+XIIIW
 XLAB
 XLABW
 XLO

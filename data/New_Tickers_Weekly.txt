@@ -1,11 +1,6 @@
-# Total: 5972 unique tickers
-CATL
-CATLR
-DRK
-MTAK
-MTAKW
-TDNA
-TLAC
-TLACW
-TMID
-TSEE
+# Total: 5977 unique tickers
+ETRA
+LEDRU
+OIG
+XIII
+XIIIW
