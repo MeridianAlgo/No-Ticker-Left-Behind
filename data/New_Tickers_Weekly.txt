@@ -1,6 +1,0 @@
-# Total: 5977 unique tickers
-ETRA
-LEDRU
-OIG
-XIII
-XIIIW
