@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5977 unique tickers
+# Total: 5980 unique tickers
 AAAP
 AACB
 AACBR
@@ -1773,6 +1773,7 @@ ESPO
 ESPR
 ESQ
 ESTA
+ESYN
 ETEC
 ETHA
 ETHB
@@ -5084,6 +5085,8 @@ SVCC
 SVCCU
 SVCCW
 SVCO
+SVIA
+SVIAW
 SVIV
 SVIVU
 SVIVW

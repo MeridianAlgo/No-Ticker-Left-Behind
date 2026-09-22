@@ -1,0 +1,4 @@
+# Total: 5980 unique tickers
+ESYN
+SVIA
+SVIAW
