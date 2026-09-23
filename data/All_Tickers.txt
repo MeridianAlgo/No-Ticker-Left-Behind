@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5980 unique tickers
+# Total: 5984 unique tickers
 AAAP
 AACB
 AACBR
@@ -3802,6 +3802,8 @@ NVVE
 NVX
 NVYY
 NWBI
+NWCL
+NWCLW
 NWE
 NWFL
 NWGL
@@ -4389,6 +4391,7 @@ QQLV
 QQMG
 QQQ
 QQQA
+QQQB
 QQQE
 QQQG
 QQQH
@@ -5627,6 +5630,7 @@ VOLT
 VONE
 VONG
 VONV
+VOOB
 VOR
 VOTE
 VOXR

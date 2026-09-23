@@ -1,4 +1,5 @@
-# Total: 5980 unique tickers
-ESYN
-SVIA
-SVIAW
+# Total: 5984 unique tickers
+NWCL
+NWCLW
+QQQB
+VOOB
