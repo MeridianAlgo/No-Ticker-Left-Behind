@@ -1,5 +1,13 @@
-# Total: 5984 unique tickers
-NWCL
-NWCLW
-QQQB
-VOOB
+# Total: 5996 unique tickers
+CHIP
+HUCK
+LOVIU
+MYCP
+MYHF
+MYML
+ONEN
+QQI
+TXCA
+TXNY
+VMHY
+VMSD
