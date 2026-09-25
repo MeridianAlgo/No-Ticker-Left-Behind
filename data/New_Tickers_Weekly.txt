@@ -1,13 +1,6 @@
-# Total: 5996 unique tickers
-CHIP
-HUCK
-LOVIU
-MYCP
-MYHF
-MYML
-ONEN
-QQI
-TXCA
-TXNY
-VMHY
-VMSD
+# Total: 6001 unique tickers
+FJDI
+FJDIR
+FJDIW
+HWMV
+TORK

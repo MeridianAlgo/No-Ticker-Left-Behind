@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 5996 unique tickers
+# Total: 6001 unique tickers
 AAAP
 AACB
 AACBR
@@ -1981,7 +1981,10 @@ FIVY
 FIXD
 FIYY
 FIZZ
+FJDI
+FJDIR
 FJDIU
+FJDIW
 FJP
 FKU
 FKWL
@@ -2573,6 +2576,7 @@ HWGV
 HWH
 HWIV
 HWKN
+HWMV
 HWO
 HWSM
 HXHX
@@ -5301,6 +5305,7 @@ TOIIW
 TOMZ
 TONX
 TOP
+TORK
 TORO
 TOUR
 TOWN
