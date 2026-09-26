@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6001 unique tickers
+# Total: 6006 unique tickers
 AAAP
 AACB
 AACBR
@@ -116,6 +116,7 @@ ADIL
 ADMA
 ADP
 ADPT
+ADRX
 ADSE
 ADSEW
 ADSK
@@ -845,6 +846,7 @@ BRNS
 BRNX
 BRNY
 BRR
+BRRKU
 BRRR
 BRRWW
 BRTM
@@ -4063,6 +4065,7 @@ PAYP
 PAYS
 PAYX
 PBAM
+PBCS
 PBEU
 PBFS
 PBHC
@@ -4075,6 +4078,8 @@ PBPH
 PBQQ
 PBRG
 PBSC
+PBUB
+PBWN
 PBYI
 PC
 PCAP
