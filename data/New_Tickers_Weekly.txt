@@ -1,6 +1,0 @@
-# Total: 6006 unique tickers
-ADRX
-BRRKU
-PBCS
-PBUB
-PBWN
