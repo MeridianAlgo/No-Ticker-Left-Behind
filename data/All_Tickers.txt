@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6006 unique tickers
+# Total: 6008 unique tickers
 AAAP
 AACB
 AACBR
@@ -1940,6 +1940,8 @@ FFIV
 FFUT
 FGBI
 FGBIP
+FGC
+FGCPP
 FGI
 FGII
 FGIIU
