@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6008 unique tickers
+# Total: 6010 unique tickers
 AAAP
 AACB
 AACBR
@@ -2315,6 +2315,7 @@ GOSS
 GOU
 GOVI
 GOVX
+GOW
 GP
 GPAC
 GPACU
@@ -5241,6 +5242,7 @@ THFF
 THH
 THMZ
 THRM
+THRMV
 THRV
 THRY
 THYM
