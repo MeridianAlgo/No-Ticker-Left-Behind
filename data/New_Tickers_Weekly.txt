@@ -1,3 +1,5 @@
-# Total: 6010 unique tickers
-GOW
-THRMV
+# Total: 6014 unique tickers
+FFR
+ICMO
+MUY
+RZAI
