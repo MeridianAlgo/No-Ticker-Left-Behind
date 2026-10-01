@@ -1,5 +1,4 @@
-# Total: 6014 unique tickers
-FFR
-ICMO
-MUY
-RZAI
+# Total: 6017 unique tickers
+ACCV
+ENHE
+OPNW

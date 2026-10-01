@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6014 unique tickers
+# Total: 6017 unique tickers
 AAAP
 AACB
 AACBR
@@ -59,6 +59,7 @@ ACB
 ACBE
 ACBH
 ACCL
+ACCV
 ACDC
 ACEP
 ACET
@@ -1723,6 +1724,7 @@ ENDW
 ENGN
 ENGNW
 ENGS
+ENHE
 ENHI
 ENHU
 ENLT
@@ -3956,6 +3958,7 @@ OPENW
 OPENZ
 OPI
 OPK
+OPNW
 OPPJ
 OPRA
 OPRT
