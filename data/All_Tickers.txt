@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6017 unique tickers
+# Total: 6020 unique tickers
 AAAP
 AACB
 AACBR
@@ -1168,6 +1168,7 @@ CHSN
 CHTR
 CHTRP
 CHW
+CHWM
 CHY
 CHYM
 CIBR
@@ -3440,6 +3441,7 @@ MLKN
 MLTX
 MLYS
 MMED
+MMEDV
 MMLP
 MMSI
 MMTX
@@ -5203,6 +5205,7 @@ TDAC
 TDACU
 TDACW
 TDCL
+TDEM
 TDI
 TDIC
 TDIV
