@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6020 unique tickers
+# Total: 6021 unique tickers
 AAAP
 AACB
 AACBR
@@ -4712,6 +4712,7 @@ SAIC
 SAIH
 SAIHW
 SAIL
+SAIQ
 SAMG
 SANA
 SANG
