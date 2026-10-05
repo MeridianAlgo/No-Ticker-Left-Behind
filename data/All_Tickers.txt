@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6021 unique tickers
+# Total: 6022 unique tickers
 AAAP
 AACB
 AACBR
@@ -5807,6 +5807,7 @@ WOK
 WOOD
 WOOF
 WPRT
+WQEY
 WRAP
 WRD
 WRLD
