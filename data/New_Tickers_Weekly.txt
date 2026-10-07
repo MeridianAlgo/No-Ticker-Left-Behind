@@ -1,6 +1,5 @@
-# Total: 6027 unique tickers
-IPHX
-IPHXW
-RWAYM
-TBCV
-TBCVW
+# Total: 6031 unique tickers
+CTGG
+CTHH
+LUMN
+PAXGU

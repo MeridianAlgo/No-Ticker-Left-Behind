@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6027 unique tickers
+# Total: 6031 unique tickers
 AAAP
 AACB
 AACBR
@@ -1380,6 +1380,8 @@ CTAAU
 CTAS
 CTBI
 CTEC
+CTGG
+CTHH
 CTKB
 CTLP
 CTMX
@@ -3252,6 +3254,7 @@ LUCY
 LUCYW
 LULG
 LULU
+LUMN
 LUNG
 LUNR
 LVDS
@@ -4073,6 +4076,7 @@ PATN
 PAVM
 PAVS
 PAX
+PAXGU
 PAYO
 PAYP
 PAYS
