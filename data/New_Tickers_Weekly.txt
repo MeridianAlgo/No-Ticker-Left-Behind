@@ -1,5 +1,4 @@
-# Total: 6031 unique tickers
-CTGG
-CTHH
-LUMN
-PAXGU
+# Total: 6034 unique tickers
+BBCI
+BBCIW
+WORX

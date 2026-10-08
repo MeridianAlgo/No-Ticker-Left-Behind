@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6031 unique tickers
+# Total: 6034 unique tickers
 AAAP
 AACB
 AACBR
@@ -602,6 +602,8 @@ BAYAR
 BAYAU
 BBB
 BBBYW
+BBCI
+BBCIW
 BBCP
 BBCQ
 BBCQU
@@ -5815,6 +5817,7 @@ WNW
 WOK
 WOOD
 WOOF
+WORX
 WPRT
 WQEY
 WRAP
