@@ -1,4 +1,5 @@
-# Total: 6034 unique tickers
-BBCI
-BBCIW
-WORX
+# Total: 6038 unique tickers
+BDAI
+SCAT
+SCATR
+SCATW

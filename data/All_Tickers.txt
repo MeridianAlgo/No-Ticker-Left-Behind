@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6034 unique tickers
+# Total: 6038 unique tickers
 AAAP
 AACB
 AACBR
@@ -642,6 +642,7 @@ BCTX
 BCTXL
 BCTXZ
 BCYC
+BDAI
 BDCI
 BDCIU
 BDCIW
@@ -4748,7 +4749,10 @@ SBUX
 SCA
 SCAG
 SCAGW
+SCAT
+SCATR
 SCATU
+SCATW
 SCDS
 SCHL
 SCII
