@@ -1,4 +1,0 @@
-# Total: 6041 unique tickers
-AIOK
-RTSN
-TRXB
