@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6041 unique tickers
+# Total: 6042 unique tickers
 AAAP
 AACB
 AACBR
@@ -2838,6 +2838,7 @@ IRHO
 IRHOR
 IRHOU
 IRIX
+IRLA
 IRMD
 IRON
 IRTC
