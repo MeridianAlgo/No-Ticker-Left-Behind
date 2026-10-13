@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6042 unique tickers
+# Total: 6044 unique tickers
 AAAP
 AACB
 AACBR
@@ -564,6 +564,7 @@ AXGN
 AXIN
 AXINR
 AXINU
+AXNX
 AXON
 AXPG
 AXSM
@@ -4639,6 +4640,7 @@ RNGTW
 RNIN
 RNRG
 RNTX
+RNTZ
 RNW
 RNWWW
 RNXT
