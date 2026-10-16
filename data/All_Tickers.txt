@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6051 unique tickers
+# Total: 6054 unique tickers
 AAAP
 AACB
 AACBR
@@ -326,6 +326,7 @@ AMPGZ
 AMPH
 AMPL
 AMRN
+AMRO
 AMRX
 AMSC
 AMSF
@@ -779,6 +780,7 @@ BMEA
 BMGL
 BMHL
 BMM
+BMMX
 BMNG
 BMOP
 BMR
@@ -2621,6 +2623,7 @@ IACQ
 IACQU
 IACQW
 IALT
+IAM
 IART
 IBAC
 IBACR
