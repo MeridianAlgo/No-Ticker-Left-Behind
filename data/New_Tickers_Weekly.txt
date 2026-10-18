@@ -1,3 +1,0 @@
-# Total: 6056 unique tickers
-CTY
-TCXB
