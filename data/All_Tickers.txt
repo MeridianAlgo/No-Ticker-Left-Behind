@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6056 unique tickers
+# Total: 6057 unique tickers
 AAAP
 AACB
 AACBR
@@ -5061,6 +5061,7 @@ SRPT
 SRRK
 SRTA
 SRTAW
+SRTM
 SRTS
 SRZN
 SRZNW
