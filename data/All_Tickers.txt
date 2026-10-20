@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6057 unique tickers
+# Total: 6059 unique tickers
 AAAP
 AACB
 AACBR
@@ -2491,6 +2491,7 @@ HIFS
 HIHO
 HIMX
 HIMZ
+HINC
 HIND
 HIS
 HISF
@@ -3111,6 +3112,7 @@ LCFY
 LCFYW
 LCID
 LCNB
+LCU
 LCUT
 LDEM
 LDRX

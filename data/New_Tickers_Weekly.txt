@@ -1,2 +1,3 @@
-# Total: 6057 unique tickers
-SRTM
+# Total: 6059 unique tickers
+HINC
+LCU
