@@ -1,3 +1,2 @@
-# Total: 6059 unique tickers
-HINC
-LCU
+# Total: 6060 unique tickers
+MTGG
