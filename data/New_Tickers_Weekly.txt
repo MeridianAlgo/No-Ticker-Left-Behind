@@ -1,2 +1,6 @@
-# Total: 6060 unique tickers
-MTGG
+# Total: 6065 unique tickers
+AHIC
+AHYM
+ASTM
+TLCE
+TSIE
