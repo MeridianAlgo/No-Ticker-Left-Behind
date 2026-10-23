@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6065 unique tickers
+# Total: 6069 unique tickers
 AAAP
 AACB
 AACBR
@@ -1467,6 +1467,7 @@ DARE
 DASH
 DAVE
 DAVEW
+DAVI
 DAX
 DBCA
 DBCAU
@@ -1721,6 +1722,7 @@ ELVA
 ELVN
 ELVR
 ELWT
+EMAG
 EMAT
 EMB
 EMBC
@@ -3631,6 +3633,8 @@ NAMM
 NAMMW
 NAMS
 NAMSW
+NANO
+NANOW
 NATH
 NATO
 NATR

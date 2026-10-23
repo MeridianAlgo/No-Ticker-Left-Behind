@@ -1,6 +1,5 @@
-# Total: 6065 unique tickers
-AHIC
-AHYM
-ASTM
-TLCE
-TSIE
+# Total: 6069 unique tickers
+DAVI
+EMAG
+NANO
+NANOW
