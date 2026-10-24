@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6069 unique tickers
+# Total: 6074 unique tickers
 AAAP
 AACB
 AACBR
@@ -403,6 +403,7 @@ APURR
 APURU
 APVO
 APWC
+APXC
 APXT
 APXTU
 APXTW
@@ -3291,6 +3292,7 @@ LX
 LXEH
 LXEO
 LXRX
+LYCA
 LYEL
 LYFT
 LYTS
@@ -4101,6 +4103,8 @@ PATN
 PAVM
 PAVS
 PAX
+PAXG
+PAXGR
 PAXGU
 PAYO
 PAYP
@@ -4961,6 +4965,7 @@ SMHC
 SMHX
 SMID
 SMMT
+SMNG
 SMOM
 SMPL
 SMRI

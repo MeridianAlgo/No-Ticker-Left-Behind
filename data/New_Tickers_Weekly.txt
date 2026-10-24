@@ -1,5 +1,6 @@
-# Total: 6069 unique tickers
-DAVI
-EMAG
-NANO
-NANOW
+# Total: 6074 unique tickers
+APXC
+LYCA
+PAXG
+PAXGR
+SMNG
