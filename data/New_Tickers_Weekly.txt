@@ -1,6 +1,0 @@
-# Total: 6074 unique tickers
-APXC
-LYCA
-PAXG
-PAXGR
-SMNG
