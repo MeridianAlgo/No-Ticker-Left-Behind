@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6074 unique tickers
+# Total: 6076 unique tickers
 AAAP
 AACB
 AACBR
@@ -148,6 +148,7 @@ AESP
 AESPR
 AESPU
 AESPW
+AETR
 AEVA
 AEYE
 AFBI
@@ -1901,6 +1902,7 @@ FCAL
 FCAP
 FCBC
 FCCO
+FCDH
 FCEF
 FCEL
 FCFS
