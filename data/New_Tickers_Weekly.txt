@@ -1,2 +1,4 @@
-# Total: 6077 unique tickers
-RADD
+# Total: 6080 unique tickers
+FFTT
+SCQCU
+YSKH
