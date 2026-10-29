@@ -1,4 +1,2 @@
-# Total: 6080 unique tickers
-FFTT
-SCQCU
-YSKH
+# Total: 6081 unique tickers
+AZR

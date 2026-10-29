@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6080 unique tickers
+# Total: 6081 unique tickers
 AAAP
 AACB
 AACBR
@@ -581,6 +581,7 @@ AYTU
 AZ
 AZI
 AZIO
+AZR
 AZTA
 AZYY
 BABU
