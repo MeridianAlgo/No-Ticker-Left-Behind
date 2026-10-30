@@ -1,2 +1,5 @@
-# Total: 6081 unique tickers
-AZR
+# Total: 6085 unique tickers
+BHAIU
+FBEQ
+FIBT
+GBC

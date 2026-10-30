@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6081 unique tickers
+# Total: 6085 unique tickers
 AAAP
 AACB
 AACBR
@@ -706,6 +706,7 @@ BGMS
 BGRN
 BGRO
 BGUS
+BHAIU
 BHAV
 BHAVR
 BHAVU
@@ -1884,6 +1885,7 @@ FAST
 FATE
 FATN
 FBDT
+FBEQ
 FBGL
 FBIO
 FBIOP
@@ -1984,6 +1986,7 @@ FGSI
 FHB
 FHTX
 FIBK
+FIBT
 FICS
 FID
 FIEE
@@ -2201,6 +2204,7 @@ GARY
 GASS
 GAUZ
 GAVA
+GBC
 GBDC
 GBFH
 GBLI
