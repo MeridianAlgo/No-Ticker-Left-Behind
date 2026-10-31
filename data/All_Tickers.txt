@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6085 unique tickers
+# Total: 6089 unique tickers
 AAAP
 AACB
 AACBR
@@ -474,6 +474,7 @@ ASO
 ASPC
 ASPCR
 ASPCU
+ASPE
 ASPI
 ASPS
 ASPSW
@@ -626,6 +627,7 @@ BBLGW
 BBNX
 BBOT
 BBSI
+BBTX
 BBUL
 BBYY
 BCAB
@@ -3404,6 +3406,7 @@ MESHU
 MESHW
 MESO
 META
+METAM
 METC
 METCB
 METCI
@@ -3774,6 +3777,7 @@ NOEMR
 NOEMU
 NOEMW
 NOMA
+NORD
 NOTV
 NOVT
 NOVTU

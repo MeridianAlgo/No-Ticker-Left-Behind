@@ -1,5 +1,5 @@
-# Total: 6085 unique tickers
-BHAIU
-FBEQ
-FIBT
-GBC
+# Total: 6089 unique tickers
+ASPE
+BBTX
+METAM
+NORD
