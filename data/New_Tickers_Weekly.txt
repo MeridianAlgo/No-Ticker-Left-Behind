@@ -1,5 +1,0 @@
-# Total: 6089 unique tickers
-ASPE
-BBTX
-METAM
-NORD
