@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6089 unique tickers
+# Total: 6090 unique tickers
 AAAP
 AACB
 AACBR
@@ -1020,6 +1020,7 @@ CART
 CARY
 CARZ
 CASH
+CASK
 CASS
 CAST
 CASY
