@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6090 unique tickers
+# Total: 6091 unique tickers
 AAAP
 AACB
 AACBR
@@ -3649,6 +3649,7 @@ NAMS
 NAMSW
 NANO
 NANOW
+NARA
 NATH
 NATO
 NATR
