@@ -15,7 +15,7 @@ def load_valid_tickers_from_csv(csv_path: str) -> Set[str]:
     if not os.path.exists(csv_path):
         return set()
 
-    df = pd.read_csv(csv_path)
+    df = pd.read_csv(csv_path, keep_default_na=False, na_values=[""])
     # Tickers with company_name are valid
     valid = (
         df[(df["company_name"].notna()) & (df["company_name"] != "")]["ticker"]
@@ -39,7 +39,7 @@ def remove_invalid_tickers(csv_path: str, db_path: str, txt_path: str) -> int:
 
     # Filter CSV
     if os.path.exists(csv_path):
-        df = pd.read_csv(csv_path)
+        df = pd.read_csv(csv_path, keep_default_na=False, na_values=[""])
         original_count = len(df)
         df = df[df["ticker"].isin(valid_tickers)]
         df.to_csv(csv_path, index=False)

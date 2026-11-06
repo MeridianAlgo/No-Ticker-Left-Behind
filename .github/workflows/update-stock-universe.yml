@@ -1,4 +1,4 @@
-name: Update Stock Universe
+name: Update TickerAtlas Data
 
 on:
   schedule:
@@ -81,10 +81,20 @@ jobs:
         run: |
           python src/combine_universes.py --out-csv data/All_Stocks.csv --out-db data/All_Stocks.sqlite --out-txt data/All_Tickers.txt
 
+      - name: Build crypto universe (crypti/cryptocurrencies)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python src/build_crypto_list.py --out-dir data
+
+      - name: Build unified asset index
+        run: |
+          python src/build_asset_index.py --out-csv data/All_Assets.csv
+
       - name: Detect new tickers added this run
         run: |
-          sort -u /tmp/previous_tickers.txt > /tmp/previous_tickers_sorted.txt
-          sort -u data/All_Tickers.txt > /tmp/current_tickers_sorted.txt
+          grep -v '^#' /tmp/previous_tickers.txt | sort -u > /tmp/previous_tickers_sorted.txt
+          grep -v '^#' data/All_Tickers.txt | sort -u > /tmp/current_tickers_sorted.txt
           comm -13 /tmp/previous_tickers_sorted.txt /tmp/current_tickers_sorted.txt > data/New_Tickers_Weekly.txt
           echo "new_ticker_count=$(wc -l < data/New_Tickers_Weekly.txt)" >> "$GITHUB_ENV"
 
@@ -93,7 +103,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add data/ inputs/global_tickers.txt
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update stock universe and discover new tickers [$(date -u +'%Y-%m-%d')]" && git pull --rebase origin main && git push origin HEAD:main)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update TickerAtlas data and discover new tickers [$(date -u +'%Y-%m-%d')]" && git pull --rebase origin main && git push origin HEAD:main)
 
       - name: Create success issue
         if: success()
@@ -113,7 +123,7 @@ jobs:
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: issue.number,
-                  body: `✅ Stock universe build succeeded! Newly discovered tickers this week: ${process.env.new_ticker_count || '0'}. Closing this issue.`
+                  body: `✅ TickerAtlas data build succeeded! Newly discovered tickers this week: ${process.env.new_ticker_count || '0'}. Closing this issue.`
                 });
                 await github.rest.issues.update({
                   owner: context.repo.owner,
@@ -140,8 +150,8 @@ jobs:
               await github.rest.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                title: '❌ Stock Universe Build Failed',
-                body: `The automated stock universe build failed on ${new Date().toISOString()}.\n\nCheck the workflow run for details: ${context.server_url}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+                title: '❌ TickerAtlas Data Build Failed',
+                body: `The automated TickerAtlas data build failed on ${new Date().toISOString()}.\n\nCheck the workflow run for details: ${context.server_url}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
                 labels: ['stock-universe-failure']
               });
             }

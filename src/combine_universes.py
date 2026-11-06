@@ -36,7 +36,7 @@ def combine_universes(
 
     if os.path.exists(us_csv):
         try:
-            us_data = pd.read_csv(us_csv)
+            us_data = pd.read_csv(us_csv, keep_default_na=False, na_values=[""])
             print(f"Loaded US universe: {len(us_data)} stocks")
         except Exception as e:
             print(f"Error reading US CSV: {e}")
@@ -44,7 +44,7 @@ def combine_universes(
 
     if os.path.exists(global_csv):
         try:
-            global_data = pd.read_csv(global_csv)
+            global_data = pd.read_csv(global_csv, keep_default_na=False, na_values=[""])
             print(f"Loaded Global universe: {len(global_data)} stocks")
         except Exception as e:
             print(f"Error reading Global CSV: {e}")
@@ -56,6 +56,12 @@ def combine_universes(
 
     # Combine the datasets
     combined = pd.concat([us_data, global_data], ignore_index=True)
+
+    # Drop rows without a ticker (keep_default_na=False above means real
+    # tickers such as "NA" survive; only genuinely empty cells are dropped)
+    combined = combined[combined["ticker"].notna()]
+    combined["ticker"] = combined["ticker"].astype(str).str.strip()
+    combined = combined[combined["ticker"] != ""]
 
     # Remove duplicates, keeping the first occurrence
     combined = combined.drop_duplicates(subset=["ticker"], keep="first")

@@ -66,7 +66,7 @@ def _download_text(url: str, timeout_s: int = 60) -> str:
         url,
         timeout=timeout_s,
         headers={
-            "User-Agent": "List-of-Stocks/1.0 (+https://github.com/)",
+            "User-Agent": "TickerAtlas/1.0 (+https://github.com/MeridianAlgo/TickerAtlas)",
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             "Accept-Language": "en-US,en;q=0.9",
         },
@@ -131,15 +131,19 @@ def fetch_nasdaq_trader_listings() -> pd.DataFrame:
 
     listings = pd.concat(frames, ignore_index=True)
 
-    # Normalize key columns
-    if "Symbol" in listings.columns:
-        listings = listings.rename(columns={"Symbol": "ticker"})
-    elif "ACT Symbol" in listings.columns:
-        listings = listings.rename(columns={"ACT Symbol": "ticker"})
-
-    listings["ticker"] = listings["ticker"].astype(str).str.strip()
+    # Normalize key columns. nasdaqlisted.txt calls the column "Symbol" while
+    # otherlisted.txt (NYSE, NYSE American, NYSE Arca, Cboe, IEX) calls it
+    # "ACT Symbol". After concat both columns exist, so coalesce them; renaming
+    # only one silently dropped every otherlisted row.
+    sym = pd.Series([None] * len(listings), index=listings.index, dtype=object)
+    for c in ("Symbol", "ACT Symbol"):
+        if c in listings.columns:
+            sym = sym.fillna(listings[c])
+    listings["ticker"] = sym.fillna("").astype(str).str.strip()
 
     # Filter out test issues and invalid tickers
+    if "Test Issue" in listings.columns:
+        listings = listings[listings["Test Issue"].astype(str).str.strip() != "Y"]
     listings = listings[listings["ticker"].str.len() > 0]
     listings = listings[~listings["ticker"].str.contains("\\^", regex=True, na=False)]
 
@@ -284,6 +288,21 @@ def fetch_global_listings_from_file(path: str) -> pd.DataFrame:
     return df
 
 
+def to_yahoo_symbol(ticker: str) -> str:
+    """Map a NASDAQ Trader / CQS symbol to Yahoo Finance's convention.
+
+    Class shares use "-" on Yahoo (BRK.B -> BRK-B) and preferred series use
+    "-P" (ABR$D -> ABR-PD). Only apply this to US listings: global symbols
+    in inputs/global_tickers.txt are already Yahoo symbols (e.g. "VOD.L").
+    """
+    t = str(ticker).strip()
+    if "$" in t:
+        t = t.replace("$", "-P")
+    if re.fullmatch(r"[A-Z]+\.[A-Z]", t):
+        t = t.replace(".", "-")
+    return t
+
+
 def _yf_info_for_ticker(ticker: str) -> Dict[str, Any]:
     t = yf.Ticker(ticker)
     info = t.info or {}
@@ -306,6 +325,7 @@ def enrich_with_yfinance(
     max_retries: int = 6,
     start: int = 0,
     count: Optional[int] = None,
+    map_us_symbols: bool = False,
 ) -> pd.DataFrame:
     tickers_list = [str(t).strip() for t in tickers if str(t).strip()]
     if start < 0:
@@ -325,7 +345,7 @@ def enrich_with_yfinance(
         delay = max(0.0, float(sleep_s))
         for attempt in range(max_retries):
             try:
-                info = _yf_info_for_ticker(t)
+                info = _yf_info_for_ticker(to_yahoo_symbol(t) if map_us_symbols else t)
                 info["ticker"] = t
                 if delay > 0:
                     time.sleep(delay)
@@ -504,11 +524,16 @@ def write_tickers_txt(df: pd.DataFrame, path: str) -> None:
             f.write(t + "\n")
 
 
+def read_csv_safe(path: str) -> pd.DataFrame:
+    """Read a CSV without turning real tickers like "NA" or "NULL" into NaN."""
+    return pd.read_csv(path, keep_default_na=False, na_values=[""])
+
+
 def read_existing_csv(path: str) -> pd.DataFrame:
     """Read existing CSV file if it exists, return empty DataFrame otherwise."""
     if os.path.exists(path):
         try:
-            return pd.read_csv(path)
+            return read_csv_safe(path)
         except Exception:
             return pd.DataFrame()
     return pd.DataFrame()
@@ -741,6 +766,7 @@ def main() -> int:
                 max_retries=args.max_retries,
                 start=args.start,
                 count=args.count,
+                map_us_symbols=(name == "us"),
             )
         if "ticker" not in yf_info.columns:
             raise RuntimeError("yfinance enrichment returned no ticker column")

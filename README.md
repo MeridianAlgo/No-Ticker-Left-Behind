@@ -1,186 +1,121 @@
-# NTLB (No-Ticker-Left-Behind)
+# TickerAtlas
 
-This repository contians all tickers for all stocks across the world, and generates a regularly refreshed stock universe and exports it in common formats for use in other programs.
+**Every stock, ETF and crypto ticker in one open, machine-readable atlas.**
 
-## Outputs
+TickerAtlas (formerly *No-Ticker-Left-Behind*) is a daily-refreshed reference dataset of US-listed stocks and ETFs plus 12,000+ cryptocurrencies. It includes names, exchanges, sectors, industries, countries, market caps and company descriptions, published as CSV, JSON, SQLite and plain text. A static website and JSON API on GitHub Pages make every ticker easy to look up, for people and for AI agents.
 
-Generated into `data/`:
+- **Website & search:** https://meridianalgo.github.io/TickerAtlas/
+- **API & AI docs:** https://meridianalgo.github.io/TickerAtlas/docs.html
+- **LLM context:** [`llms.txt`](llms.txt) (repo) · https://meridianalgo.github.io/TickerAtlas/llms.txt (live, with counts)
 
-- **All_Stocks.csv** - Combined universe with all stocks and detailed company information
-- **All_Stocks.sqlite** - Indexed database (table: `stocks`) for fast queries
-- **All_Tickers.txt** - Simple ticker list (one per line)
+## Quick start (no install)
 
-## Data sources
+```bash
+# One ticker (stocks/ETFs under api/stocks/, crypto under api/crypto/)
+curl https://meridianalgo.github.io/TickerAtlas/api/stocks/AAPL.json
+curl https://meridianalgo.github.io/TickerAtlas/api/crypto/BTC.json
 
-- **Ticker universe**: NASDAQ Trader symbol directories
-  - `nasdaqlisted.txt`
-  - `otherlisted.txt`
-- **Metadata enrichment**: `yfinance` (Yahoo Finance)
+# Everything, as one flat CSV straight from this repo
+curl -O https://raw.githubusercontent.com/MeridianAlgo/TickerAtlas/main/data/All_Assets.csv
+```
 
-## Columns (canonical schema)
+```python
+import pandas as pd
+# keep_default_na=False stops pandas from reading the real ticker "NA" as missing
+df = pd.read_csv("https://raw.githubusercontent.com/MeridianAlgo/TickerAtlas/main/data/All_Assets.csv",
+                 keep_default_na=False, na_values=[""])
+df[df.asset_class == "crypto"].head()
+```
 
-The generator normalizes a stable set of fields:
+## Files in `data/`
 
-- `ticker`
-- `company_name`
-- `quote_type`
-- `exchange`
-- `exchange_name`
-- `currency`
-- `country`
-- `sector`
-- `industry`
-- `website`
-- `employees`
-- `market_cap`
-- `first_trade_date`
-- `age_years_since_first_trade`
-- `business_summary`
-- `listing_source`
-- `updated_at_utc`
+| File | Contents |
+| --- | --- |
+| `All_Assets.csv` | **Start here.** Every stock, ETF and crypto: `id, ticker, name, asset_class, exchange, country, sector, source` |
+| `All_Stocks.csv` | Full stock & ETF records (schema below) |
+| `All_Stocks.sqlite` | Same, as SQLite (table `stocks`, indexed on ticker / exchange / sector / country) |
+| `All_Tickers.txt` | Stock & ETF tickers, one per line |
+| `Crypto.csv` | Crypto `ticker, name, asset_class, source` |
+| `Crypto.json` | Crypto symbols + names with source metadata (upstream commit, license) |
+| `Crypto_Tickers.txt` | Crypto symbols, one per line |
+| `US_Stocks.*` | US-only intermediate build (same schema as `All_Stocks`) |
+| `New_Tickers_Weekly.txt` | Stock tickers newly discovered in the latest run |
 
-Notes:
-- `age_years_since_first_trade` is computed from Yahoo's `firstTradeDateEpochUtc` when available.
-- Some tickers will have missing fields depending on what the provider returns.
+`id` (`stock:SOL`, `crypto:SOL`) is the unique key. `ticker` alone is **not** unique across asset classes.
+
+### Stock & ETF schema (`All_Stocks.csv`)
+
+| Column | Description |
+| --- | --- |
+| `ticker` | Symbol as published by NASDAQ Trader (class shares use a dot, e.g. `BRK.B`) |
+| `company_name` | Company / fund name |
+| `quote_type` | `EQUITY`, `ETF`, … (Yahoo quote type) |
+| `exchange`, `exchange_name` | Exchange code and display name (e.g. `NMS` / `NasdaqGS`) |
+| `currency`, `country` | Trading currency, company country |
+| `sector`, `industry` | Yahoo Finance classification |
+| `website`, `employees`, `market_cap` | Company website, full-time employees, market cap at update time |
+| `first_trade_date`, `age_years_since_first_trade` | First trade date and age in years, when known |
+| `business_summary` | Company description |
+| `listing_source` | `nasdaqlisted`, `otherlisted` (NYSE, NYSE American, NYSE Arca, Cboe, IEX) or `file` (global) |
+| `updated_at_utc` | When the row was last refreshed |
+
+Some fields are empty when Yahoo Finance returns nothing for a symbol.
+
+## Website & JSON API
+
+`src/build_site.py` turns `data/` into a static site (deployed by `.github/workflows/deploy-site.yml`):
+
+| Path | Returns |
+| --- | --- |
+| `api/stocks/{slug}.json`, `api/crypto/{slug}.json` | One record |
+| `stocks/{slug}.html`, `crypto/{slug}.html` | Overview page with schema.org JSON-LD |
+| `api/index.json` | Compact columnar index of every asset (powers the search box) |
+| `api/stocks.json`, `api/crypto.json`, `api/meta.json` | Bulk records and build metadata |
+| `llms.txt`, `llms-full.txt`, `openapi.json`, `sitemap.xml` | AI / crawler-friendly descriptions |
+| `data/*` | Copies of the raw downloads |
+
+`{slug}` is the ticker with every character outside `[A-Za-z0-9.-]` replaced by `_` + its UTF-8 hex (`$MAID` → `_24MAID`).
 
 ## Run locally
 
 ```bash
-python -m venv .venv
-# activate venv
+python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
-# Build US universe
-python src/build_stock_list.py --universe us
-
-# Build Global universe
-python src/build_stock_list.py --universe global --global-source file
-
-# Combine both universes into a single comprehensive list
-python src/combine_universes.py --out-csv data/All_Stocks.csv --out-db data/All_Stocks.sqlite --out-txt data/All_Tickers.txt --out-json data/All_Stocks.json
+python src/build_stock_list.py --universe us --db-mode upsert --verbose   # US listings + Yahoo metadata
+python src/build_stock_list.py --universe global --global-source file      # optional: inputs/global_tickers.txt
+python src/combine_universes.py                                            # -> data/All_Stocks.*
+python src/build_crypto_list.py                                            # -> data/Crypto.*
+python src/build_asset_index.py                                            # -> data/All_Assets.csv
+python src/build_site.py --out _site                                       # -> static site
+python -m http.server 8000 --directory _site                               # preview at http://localhost:8000
 ```
 
-Optional flags:
+Useful `build_stock_list.py` flags: `--max-tickers N` (debug), `--no-yfinance` (listing data only), `--workers N`, `--sleep-s S`, `--start N --count N` (chunked enrichment), `--db-mode replace|upsert`.
 
-- `--max-tickers N` (debug)
-- `--universe us|global|all`
-- `--workers N` (parallel yfinance requests; keep low to avoid rate limits)
-- `--sleep-s S` (delay/backoff between requests)
-- `--no-yfinance` (skip Yahoo enrichment; uses listing data only)
-- `--start N` (start index into ticker list; for chunked runs)
-- `--count N` (number of tickers to process from --start)
-- `--db-mode replace|upsert` (replace = overwrite DB each run; upsert = persist across runs)
-- `--verbose` (print stage-by-stage logs)
+### Bigger global universe
 
-### Windows tip (no activation required)
-
-You can run using the venv interpreter directly:
-
-```powershell
-\.\.venv\Scripts\python.exe src\build_stock_list.py --universe us --max-tickers 50
-```
-
-## GitHub Actions
-
-A weekly workflow (every Monday at 2 AM UTC) automatically:
-- Refreshes `inputs/global_tickers.txt` to discover newly listed symbols
-- Fetches the latest stock data from free APIs (Yahoo Finance, NASDAQ Trader)
-- Builds US and Global universes in upsert mode so new tickers are added to the database
-- Combines them into a single comprehensive dataset
-- Writes `data/New_Tickers_Weekly.txt` with only the symbols discovered in that run
-- Commits updated files back to the repository
-- Creates GitHub issues if the build fails
-- Auto-closes issues when the build succeeds
-
-## Progress output
-
-The build shows progress bars when `tqdm` is installed (included in `requirements.txt`).
-
-You can also pass `--verbose` to print stage-by-stage logs.
-
-## Building a bigger global universe
-
-Global tickers are sourced from `inputs/global_tickers.txt`.
-
-To generate that file by merging multiple sources, use:
-
-```powershell
-\.\.venv\Scripts\python.exe src\build_global_universe.py
-```
-
-You can also provide an API-key provider (optional):
-
-```powershell
-$env:EODHD_API_KEY = "YOUR_KEY"
-\.\.venv\Scripts\python.exe src\build_global_universe.py --eodhd-exchanges "US,TO,GER,SWX,TSE"
-```
-
-## Chunked enrichment (for large universes)
-
-For the global universe (or very large US lists), Yahoo will rate-limit if you try to enrich everything in one run. Use chunked runs with `--db-mode upsert` to persist progress across runs:
-
-```powershell
-# Example: enrich 200 tickers at a time, persisting to the same DB/CSV
-\.\.venv\Scripts\python.exe src\build_stock_list.py --universe global --global-source file --start 0 --count 200 --workers 1 --sleep-s 1.2 --db-mode upsert --verbose
-\.\.venv\Scripts\python.exe src\build_stock_list.py --universe global --global-source file --start 200 --count 200 --workers 1 --sleep-s 1.2 --db-mode upsert --verbose
-# Continue incrementing --start until you reach the end of the ticker list
-```
-
-- `--db-mode upsert` keeps the same SQLite DB and CSV, updating rows for the current chunk and adding new ones.
-- Each run exports the full CSV from the DB, so you always get a complete file.
-- Use `--workers 1` and `--sleep-s 1.2` (or higher) to avoid Yahoo rate limits.
-
-## Combining universes
-
-After building both US and Global universes, combine them into a single comprehensive dataset:
+Global tickers (Yahoo symbols such as `VOD.L`) are read from `inputs/global_tickers.txt`, which `src/build_global_universe.py` generates. It can optionally pull exchange symbol lists from EODHD:
 
 ```bash
-python src/combine_universes.py --out-csv data/All_Stocks.csv --out-db data/All_Stocks.sqlite --out-txt data/All_Tickers.txt
+EODHD_API_KEY=... python src/build_global_universe.py --eodhd-exchanges "US,TO,GER,SWX,TSE"
 ```
 
-This creates:
-- `data/All_Stocks.csv` - All stocks with detailed company information
-- `data/All_Stocks.sqlite` - Indexed database for fast queries
-- `data/All_Tickers.txt` - All unique tickers
+Yahoo rate-limits large runs. Use chunked runs (`--start/--count`) with `--db-mode upsert`, `--workers 1` and `--sleep-s 1.2`.
 
-The combined dataset includes:
-- **Detailed company information**: name, sector, industry, country, exchange, market cap, employees, website, business summary
-- **Indexed queries**: Fast lookups by ticker, exchange, sector, or country
-- **Deduplication**: Automatic removal of duplicate tickers across universes
+## Automation
 
-## Enrichment Status
+- **`update-stock-universe.yml`** (daily, 02:00 UTC): refreshes listings, enriches with Yahoo Finance, rebuilds crypto and the unified index, writes `New_Tickers_Weekly.txt`, and commits `data/`. It opens a GitHub issue on failure and closes it on the next success.
+- **`deploy-site.yml`**: rebuilds and deploys the website + API to GitHub Pages whenever `data/` or the site code changes on `main`.
 
-The enrichment process fetches detailed company information from Yahoo Finance for each ticker. This takes time due to rate limits:
+## Sources & credits
 
-- **US Stocks**: ✅ Fully enriched (5,263 stocks)
-- **Global Stocks**: ⚠️ In progress (57,358 stocks)
-- **Estimated time**: ~27 hours for full global enrichment at 1.7s per ticker
+TickerAtlas compiles data from the sources below. Please credit them when you use it. Details are in [SOURCES.md](SOURCES.md).
 
-### Check enrichment progress:
-```bash
-python check_enrichment_status.py
-```
+- **US listings:** [NASDAQ Trader symbol directory](https://www.nasdaqtrader.com/trader.aspx?id=symboldirdefs) (`nasdaqlisted.txt`, `otherlisted.txt`)
+- **Company metadata:** [Yahoo Finance](https://finance.yahoo.com/) via [yfinance](https://github.com/ranaroussi/yfinance)
+- **Cryptocurrencies:** [crypti/cryptocurrencies](https://github.com/crypti/cryptocurrencies) (MIT, © Michael Wuergler), generated from the [CryptoCompare](https://www.cryptocompare.com/) coin list
 
-### Continue enrichment:
-```bash
-# Process all remaining stocks automatically
-python enrich_all_global_stocks.py
+TickerAtlas is reference data, not investment advice. Fields may be incomplete or out of date.
 
-# Or process individual chunks manually (500 tickers each)
-python enrich_global_stocks.py 1000  # Process tickers 1000-1500
-python enrich_global_stocks.py 1500  # Process tickers 1500-2000
-# Continue incrementing by 500...
-```
-
-The enrichment uses:
-- **Chunked processing**: 500 tickers at a time
-- **Database upsert mode**: Progress is saved after each chunk
-- **Rate limit protection**: 1.5s delay between requests, automatic retry with exponential backoff
-- **Single worker**: Avoids overwhelming Yahoo Finance API
-
-## Credits
-
-- NASDAQ Trader symbol directories: https://www.nasdaqtrader.com/trader.aspx?id=symboldirdefs
-- yfinance: https://github.com/ranaroussi/yfinance
-
-**Made with ❤️ by MeridianAlgo**
+**Made with ❤️ by [MeridianAlgo](https://meridianalgo.org/)**
