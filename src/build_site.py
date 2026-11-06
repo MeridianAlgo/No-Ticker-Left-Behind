@@ -404,6 +404,7 @@ def stock_page(r: Dict[str, Any], site_url: str, built: str, crypto_twin: Option
     kind = {"stock": "stock", "etf": "ETF", "fund": "fund"}.get(ac, ac)
     exch = r["exchange_name"] or r["exchange"]
     website = r["website"]
+    website_label = re.sub(r"^https?://(www\.)?", "", website).rstrip("/") if website else ""
     items = [
         ("Ticker", f'<span class="mono">{e(t)}</span>'),
         ("Type", e(kind)),
@@ -417,7 +418,7 @@ def stock_page(r: Dict[str, Any], site_url: str, built: str, crypto_twin: Option
         ("First trade", e(r["first_trade_date"]) if r["first_trade_date"] else None),
         (
             "Website",
-            f'<a href="{e(website)}" rel="nofollow noopener">{e(re.sub(r"^https?://(www\.)?", "", website).rstrip("/"))}</a>'
+            f'<a href="{e(website)}" rel="nofollow noopener">{e(website_label)}</a>'
             if website
             else None,
         ),
