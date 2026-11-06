@@ -1,5 +1,5 @@
 # Combined US and Global stock universe
-# Total: 6095 unique tickers
+# Total: 6098 unique tickers
 AAAP
 AACB
 AACBR
@@ -61,6 +61,7 @@ ACBH
 ACCL
 ACCV
 ACDC
+ACEM
 ACEP
 ACET
 ACFN
@@ -2524,6 +2525,7 @@ HLIT
 HLMN
 HLNE
 HLP
+HLT
 HLTH
 HLXC
 HMH
@@ -2784,6 +2786,7 @@ INEO
 INGN
 INHD
 INIO
+INJC
 INK
 INKT
 INLF
