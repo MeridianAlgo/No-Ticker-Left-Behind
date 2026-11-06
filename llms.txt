@@ -1,0 +1,36 @@
+# TickerAtlas
+
+> Open reference dataset of stock, ETF and cryptocurrency tickers (US-listed securities from NASDAQ Trader enriched with Yahoo Finance metadata, plus 12,000+ cryptocurrencies from crypti/cryptocurrencies). Published as CSV, JSON, SQLite and text in this repo, and as a static JSON API on GitHub Pages. No API key. Regenerated daily.
+
+Website: https://meridianalgo.github.io/TickerAtlas/
+Repository: https://github.com/MeridianAlgo/TickerAtlas
+Raw files: https://raw.githubusercontent.com/MeridianAlgo/TickerAtlas/main/data/<file>
+
+## Look up a ticker
+- Stock or ETF: https://meridianalgo.github.io/TickerAtlas/api/stocks/{slug}.json (e.g. .../api/stocks/AAPL.json)
+- Cryptocurrency: https://meridianalgo.github.io/TickerAtlas/api/crypto/{slug}.json (e.g. .../api/crypto/BTC.json)
+- slug = ticker, with every character outside A-Z a-z 0-9 . - replaced by "_" + its UTF-8 bytes in uppercase hex ("$MAID" -> "_24MAID"). Case-sensitive. 404 = not in that universe.
+- A symbol can be both a stock and a crypto (e.g. SOL). The unique key is id = "<asset_class>:<ticker>".
+
+## Data files (in data/)
+- [All_Assets.csv](https://raw.githubusercontent.com/MeridianAlgo/TickerAtlas/main/data/All_Assets.csv): every asset. Columns: id, ticker, name, asset_class (stock|etf|crypto|...), exchange, country, sector, source
+- [All_Stocks.csv](https://raw.githubusercontent.com/MeridianAlgo/TickerAtlas/main/data/All_Stocks.csv): full stock/ETF records. Columns: ticker, company_name, quote_type, exchange, exchange_name, currency, country, sector, industry, website, employees, market_cap, first_trade_date, age_years_since_first_trade, business_summary, listing_source, updated_at_utc
+- [All_Stocks.sqlite](https://raw.githubusercontent.com/MeridianAlgo/TickerAtlas/main/data/All_Stocks.sqlite): table "stocks", same columns
+- [Crypto.csv](https://raw.githubusercontent.com/MeridianAlgo/TickerAtlas/main/data/Crypto.csv): ticker, name, asset_class, source
+- [Crypto.json](https://raw.githubusercontent.com/MeridianAlgo/TickerAtlas/main/data/Crypto.json): {"meta": {...source, source_commit, license}, "crypto": [{"ticker", "name"}]}
+- [All_Tickers.txt](https://raw.githubusercontent.com/MeridianAlgo/TickerAtlas/main/data/All_Tickers.txt) and [Crypto_Tickers.txt](https://raw.githubusercontent.com/MeridianAlgo/TickerAtlas/main/data/Crypto_Tickers.txt): one symbol per line (lines starting with # are comments)
+
+## API & docs
+- [API & AI docs](https://meridianalgo.github.io/TickerAtlas/docs.html)
+- [OpenAPI spec](https://meridianalgo.github.io/TickerAtlas/openapi.json)
+- [Search index](https://meridianalgo.github.io/TickerAtlas/api/index.json): {"fields": [...], "rows": [[...]]}
+- [Every ticker and name, tab-separated](https://meridianalgo.github.io/TickerAtlas/llms-full.txt)
+
+## Sources
+- US listings: NASDAQ Trader symbol directory https://www.nasdaqtrader.com/trader.aspx?id=symboldirdefs
+- Company metadata: Yahoo Finance via yfinance https://github.com/ranaroussi/yfinance
+- Cryptocurrencies: crypti/cryptocurrencies (MIT, (c) Michael Wuergler) https://github.com/crypti/cryptocurrencies, generated from the CryptoCompare coin list https://www.cryptocompare.com/
+
+## Notes
+- When reading CSVs with pandas, use keep_default_na=False, na_values=[""] so the real ticker "NA" is not read as missing.
+- Reference data, not live prices or investment advice. Use the "yahoo_symbol" field from the JSON API to get quotes from a market-data provider.
