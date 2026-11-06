@@ -112,9 +112,29 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE."""
 
 LOGO_SVG = (
-    '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">'
-    '<circle cx="16" cy="16" r="13"/><ellipse cx="16" cy="16" rx="5.5" ry="13"/>'
-    '<path d="M3.5 12h25M3.5 20h25"/></svg>'
+    '<svg viewBox="0 0 26 26" aria-hidden="true"><rect x="1" y="1" width="24" height="24" rx="6" fill="currentColor"/>'
+    '<path d="M7 17V12M11 17V8M15 17V13M19 17V10" style="stroke:var(--surface)" stroke-width="2" stroke-linecap="round"/></svg>'
+)
+GITHUB_SVG = (
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+    '<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3.1-.3 6.4-1.5 6.4-7a5.4 5.4 0 0 0-1.5-3.7 5 5 0 0 0-.1-3.8s-1.2-.3-3.9 1.5a13.4 13.4 0 0 0-7 0C6.3 1.7 5.1 2 5.1 2a5 5 0 0 0-.1 3.8A5.4 5.4 0 0 0 3.5 9.5c0 5.4 3.3 6.6 6.4 7a3.4 3.4 0 0 0-.9 2.6V23"/></svg>'
+)
+JSON_SVG = (
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+    '<path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1M16 3h1a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2 2 2 0 0 0-2 2v5a2 2 0 0 1-2 2h-1"/></svg>'
+)
+SAMPLE_JSON = (
+    '{\n'
+    '  <span class="k">"ticker"</span>: <span class="s">"AAPL"</span>,\n'
+    '  <span class="k">"name"</span>: <span class="s">"Apple Inc."</span>,\n'
+    '  <span class="k">"asset_class"</span>: <span class="s">"stock"</span>,\n'
+    '  <span class="k">"exchange_name"</span>: <span class="s">"NasdaqGS"</span>,\n'
+    '  <span class="k">"currency"</span>: <span class="s">"USD"</span>,\n'
+    '  <span class="k">"country"</span>: <span class="s">"United States"</span>,\n'
+    '  <span class="k">"sector"</span>: <span class="s">"Technology"</span>,\n'
+    '  <span class="k">"industry"</span>: <span class="s">"Consumer Electronics"</span>,\n'
+    '  <span class="k">"website"</span>: <span class="s">"https://www.apple.com"</span>\n'
+    '}'
 )
 SEARCH_SVG = (
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">'
@@ -327,9 +347,9 @@ def header(prefix: str, current: str = "") -> str:
         f'<a class="brand" href="{prefix}index.html">{LOGO_SVG}<span>TickerAtlas</span></a>'
         '<nav class="nav" aria-label="Main">'
         + nav("index.html", "Search", "search")
-        + nav("docs.html", "API &amp; AI", "docs")
+        + nav("docs.html", "API", "docs")
         + nav("sources.html", "Sources", "sources")
-        + f'<a href="{REPO_URL}">GitHub</a>'
+        + f'<a class="gh" href="{REPO_URL}">{GITHUB_SVG}GitHub</a>'
         + "</nav></div></header>"
     )
 
@@ -344,7 +364,7 @@ def footer(prefix: str, built: str) -> str:
         '<a href="https://github.com/crypti/cryptocurrencies">crypti/cryptocurrencies</a> (MIT, &copy; Michael Wuergler), '
         'originally from the <a href="https://www.cryptocompare.com/">CryptoCompare</a> coin list. '
         f'<a href="{prefix}sources.html">Full attribution</a>.</p>'
-        "<p>Reference data only &mdash; not investment advice. Fields can be missing or out of date. "
+        "<p>Reference data only, not investment advice. Fields can be missing or out of date. "
         f"Built {e(built)} from <a href=\"{REPO_URL}\">MeridianAlgo/TickerAtlas</a>.</p>"
         "</div></footer>"
     )
@@ -376,6 +396,9 @@ def page(
         f'<meta property="og:description" content="{e(description)}">'
         '<meta property="og:type" content="website">'
         f"{alt}"
+        '<link rel="preconnect" href="https://fonts.googleapis.com">'
+        '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+        '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&amp;display=swap">'
         f'<link rel="stylesheet" href="{prefix}assets/style.css">'
         f'<link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml">'
         f"{ld_tag}</head><body>"
@@ -394,6 +417,22 @@ def facts(items: List[tuple]) -> str:
         f'<div class="fact"><dt>{e(k)}</dt><dd>{v}</dd></div>' for k, v in items if v not in (None, "")
     )
     return f'<dl class="facts">{cells}</dl>' if cells else ""
+
+
+def crumbs(section_href: str, section: str, t: str) -> str:
+    return (
+        '<nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">TickerAtlas</a><span class="sep">/</span>'
+        f'<a href="{section_href}">{section}</a><span class="sep">/</span><b>{e(t)}</b></nav>'
+    )
+
+
+def fetch_panel(url: str) -> str:
+    cmd = f"curl {url}"
+    return (
+        '<div class="code-panel"><div class="bar"><span>Fetch this record</span>'
+        f'<button class="copy" type="button" data-copy="{e(cmd)}">Copy</button></div>'
+        f'<pre><span class="dim">$</span> {e(cmd)}</pre></div>'
+    )
 
 
 # --------------------------------------------------------------------------- detail pages
@@ -436,15 +475,22 @@ def stock_page(r: Dict[str, Any], site_url: str, built: str, crypto_twin: Option
     twin = ""
     if crypto_twin:
         twin = (
-            f'<p class="note">The symbol <span class="mono">{e(t)}</span> is also used by a cryptocurrency: '
-            f'<a href="../{e(crypto_twin["page"])}">{e(crypto_twin["name"])}</a>.</p>'
+            '<div class="side-card"><h2>Same symbol elsewhere</h2>'
+            f'<p><b>{e(t)}</b> is also used by a cryptocurrency: '
+            f'<a href="../{e(crypto_twin["page"])}">{e(crypto_twin["name"])}</a>.</p></div>'
         )
-    updated = f'<p class="crumbs">Record updated {e(r["updated_at_utc"])}</p>' if r["updated_at_utc"] else ""
+    updated = f'<p class="note">Record updated {e(r["updated_at_utc"])}. Reference data only, not investment advice.</p>' if r["updated_at_utc"] else ""
+    sub = " · ".join(e(x) for x in (exch, r["currency"], r["sector"], r["industry"]) if x)
+    about = f"<section><h2>About</h2>{summary}</section>" if summary else ""
+    links[0] = f'<a class="btn primary" href="../{e(r["json"])}">{JSON_SVG}JSON record</a>'
+    section_href = f'../index.html?type={"etf" if ac == "etf" else "stock"}'
     body = (
-        f'<p class="crumbs"><a href="../index.html">TickerAtlas</a> / <a href="../index.html?type={"etf" if ac == "etf" else "stock"}">{"ETFs" if ac == "etf" else "Stocks"}</a> / {e(t)}</p>'
-        f'<div class="ticker-head"><div><h1 class="ticker-sym">{e(t)}</h1><p class="ticker-name">{e(name)}</p></div>{badge(ac)}</div>'
-        f"{facts(items)}{summary}{twin}"
-        f'<div class="links">{"".join(links)}</div>{updated}'
+        crumbs(section_href, "ETFs" if ac == "etf" else "Stocks", t)
+        + f'<div class="ticker-head"><div><div class="ticker-title"><h1 class="ticker-sym">{e(t)}</h1>{badge(ac)}</div>'
+        f'<p class="ticker-name">{e(name)}</p>' + (f'<p class="ticker-sub">{sub}</p>' if sub else "") + "</div>"
+        f'<div class="links">{"".join(links)}</div></div>'
+        f'<div class="detail"><div class="detail-main"><section><h2>Profile</h2>{facts(items)}</section>{about}</div>'
+        f'<aside class="detail-side">{fetch_panel(site_url + r["json"])}{twin}{updated}</aside></div>'
     )
     desc_bits = [f"{name} ({t})", f"{kind} listed on {exch}" if exch else kind]
     if r["sector"]:
@@ -476,6 +522,7 @@ def stock_page(r: Dict[str, Any], site_url: str, built: str, crypto_twin: Option
         built=built,
         ld=ld,
         alt_json="../" + r["json"],
+        scripts='<script src="../assets/app.js" defer></script>',
     )
 
 
@@ -490,18 +537,20 @@ def crypto_page(r: Dict[str, Any], site_url: str, built: str, stock_twin: Option
     twin = ""
     if stock_twin:
         twin = (
-            f'<p class="note">The symbol <span class="mono">{e(t)}</span> is also a listed security: '
-            f'<a href="../{e(stock_twin["page"])}">{e(stock_twin["name"])}</a>. '
-            "Always disambiguate by asset class.</p>"
+            '<div class="side-card"><h2>Same symbol elsewhere</h2>'
+            f'<p><b>{e(t)}</b> is also a listed security: '
+            f'<a href="../{e(stock_twin["page"])}">{e(stock_twin["name"])}</a>. Always disambiguate by asset class.</p></div>'
         )
     body = (
-        f'<p class="crumbs"><a href="../index.html">TickerAtlas</a> / <a href="../index.html?type=crypto">Crypto</a> / {e(t)}</p>'
-        f'<div class="ticker-head"><div><h1 class="ticker-sym">{e(t)}</h1><p class="ticker-name">{e(name)}</p></div>{badge("crypto")}</div>'
-        f"{facts(items)}{twin}"
-        f'<div class="links"><a class="btn primary" href="../{e(r["json"])}">JSON record</a>'
-        f'<a class="btn" href="https://www.cryptocompare.com/coins/{quote(t.lower())}/overview" rel="nofollow noopener">CryptoCompare</a></div>'
-        '<p class="crumbs">Symbol list from crypti/cryptocurrencies, generated from the CryptoCompare coin list. '
-        "Crypto symbols are not standardized: several projects can share a symbol.</p>"
+        crumbs("../index.html?type=crypto", "Crypto", t)
+        + f'<div class="ticker-head"><div><div class="ticker-title"><h1 class="ticker-sym">{e(t)}</h1>{badge("crypto")}</div>'
+        f'<p class="ticker-name">{e(name)}</p><p class="ticker-sub">Cryptocurrency</p></div>'
+        f'<div class="links"><a class="btn primary" href="../{e(r["json"])}">{JSON_SVG}JSON record</a>'
+        f'<a class="btn" href="https://www.cryptocompare.com/coins/{quote(t.lower())}/overview" rel="nofollow noopener">CryptoCompare</a></div></div>'
+        f'<div class="detail"><div class="detail-main"><section><h2>Profile</h2>{facts(items)}</section></div>'
+        f'<aside class="detail-side">{fetch_panel(site_url + r["json"])}{twin}'
+        '<p class="note">Symbol list from crypti/cryptocurrencies, generated from the CryptoCompare coin list. '
+        "Crypto symbols are not standardized, so several projects can share a symbol.</p></aside></div>"
     )
     ld = {
         "@context": "https://schema.org",
@@ -520,6 +569,7 @@ def crypto_page(r: Dict[str, Any], site_url: str, built: str, stock_twin: Option
         built=built,
         ld=ld,
         alt_json="../" + r["json"],
+        scripts='<script src="../assets/app.js" defer></script>',
     )
 
 
@@ -537,55 +587,71 @@ def index_page(stats: Dict[str, Any], site_url: str, built: str) -> str:
             ("Cryptocurrencies", f"{n['crypto']:,}"),
         ]
     )
+    def fmt_tag(f: str) -> str:
+        return {"sqlite": "SQLite"}.get(f.rsplit(".", 1)[-1], f.rsplit(".", 1)[-1].upper())
+
     downloads = "".join(
-        f'<tr><td><a href="data/{f}"><code>{f}</code></a></td><td>{d}</td></tr>' for f, d in DOWNLOADS
+        f'<a class="file" href="data/{f}"><span class="top"><span class="name">{f}</span>'
+        f'<span class="badge">{fmt_tag(f)}</span></span><span class="desc">{d}</span></a>'
+        for f, d in DOWNLOADS
     )
+    curl = f"curl {site_url}api/stocks/AAPL.json"
     body = f"""
 <section class="hero">
-  <p class="eyebrow">Open ticker reference · updated daily</p>
-  <h1>Every ticker, one atlas.</h1>
-  <p class="lede">{n['total']:,} stocks, ETFs and cryptocurrencies with names, exchanges, sectors and company
-  profiles. Search them here, or point an AI agent at the static JSON API. No keys, no rate limits.</p>
+  <h1>Every stock, ETF and crypto ticker in one open dataset.</h1>
+  <p class="lede">Names, exchanges, sectors and company profiles for {n['total']:,} assets. Search them here or fetch the
+  static JSON API. No keys and no rate limits.</p>
+
+  <div class="search-panel" role="search">
+    <div class="search-row">
+      <label class="search-box">{SEARCH_SVG}<span class="sr">Search tickers</span>
+        <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="Search by ticker or name, like AAPL, Vanguard or Bitcoin" aria-describedby="result-meta" autofocus>
+        <kbd aria-hidden="true">/</kbd>
+      </label>
+      <div class="chips" role="group" aria-label="Filter by type">
+        <button class="chip" data-type="all" aria-pressed="true">All</button>
+        <button class="chip" data-type="stock" aria-pressed="false">Stocks</button>
+        <button class="chip" data-type="etf" aria-pressed="false">ETFs</button>
+        <button class="chip" data-type="crypto" aria-pressed="false">Crypto</button>
+      </div>
+    </div>
+    <div class="cols" aria-hidden="true"><span>Ticker</span><span>Name</span><span class="x">Exchange</span><span class="k">Sector</span><span>Type</span></div>
+    <ul class="results" id="results"></ul>
+    <p class="result-meta" id="result-meta" aria-live="polite"></p>
+    <noscript><p class="result-meta">Search needs JavaScript. Every ticker also has a static page, listed in <a href="sitemap.xml">sitemap.xml</a> and <a href="llms-full.txt">llms-full.txt</a>.</p></noscript>
+  </div>
+
   <div class="stats">{stat_html}</div>
 </section>
 
-<section class="search-panel" aria-label="Search tickers">
-  <div class="search-row">
-    <label class="search-box">{SEARCH_SVG}<span class="sr" hidden>Search</span>
-      <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="Search by ticker or name: AAPL, Vanguard, Bitcoin…" aria-describedby="result-meta" autofocus>
-    </label>
-    <div class="chips" role="group" aria-label="Filter by type">
-      <button class="chip" data-type="all" aria-pressed="true">All</button>
-      <button class="chip" data-type="stock" aria-pressed="false">Stocks</button>
-      <button class="chip" data-type="etf" aria-pressed="false">ETFs</button>
-      <button class="chip" data-type="crypto" aria-pressed="false">Crypto</button>
+<section class="block" id="api">
+  <div class="split">
+    <div class="block-text">
+      <h2>A static API with predictable URLs.</h2>
+      <p>Every ticker is a plain JSON file on GitHub Pages with open CORS. Agents, notebooks and browsers can fetch it directly.</p>
+      <div class="endpoints">
+        <div><code><b>GET</b>api/stocks/{{TICKER}}.json</code><span>One stock or ETF record</span></div>
+        <div><code><b>GET</b>api/crypto/{{SYMBOL}}.json</code><span>One cryptocurrency record</span></div>
+        <div><code><b>GET</b>api/index.json</code><span>Compact index of all {n['total']:,} assets</span></div>
+        <div><code><b>GET</b><a href="llms.txt">llms.txt</a> · <a href="openapi.json">openapi.json</a></code><span>Plain text context and a tool spec for agent frameworks</span></div>
+      </div>
+      <p style="margin-top:20px"><a href="docs.html">Read the full API docs →</a></p>
+    </div>
+    <div class="code-panel">
+      <div class="bar"><span>Request</span><button class="copy" type="button" data-copy="{e(curl)}">Copy</button></div>
+      <pre><span class="dim">$</span> {e(curl)}</pre>
+      <div class="bar"><span>Response · 200</span></div>
+      <pre class="json">{SAMPLE_JSON}</pre>
     </div>
   </div>
-  <p class="result-meta" id="result-meta" aria-live="polite"></p>
-  <ul class="results" id="results"></ul>
-  <noscript><p>Search needs JavaScript. Every ticker also has a static page, listed in <a href="sitemap.xml">sitemap.xml</a> and <a href="llms-full.txt">llms-full.txt</a>.</p></noscript>
 </section>
 
-<section class="block">
-  <h2>Built for AI agents</h2>
-  <p>Every ticker has a stable, predictable URL as both an HTML page and a JSON record. Everything is a static file with
-  permissive CORS, so agents, notebooks and browsers can fetch it directly. Full reference: <a href="docs.html">API &amp; AI docs</a>.</p>
-  <div class="grid-2">
-    <div class="card"><h3>Look up one ticker</h3><p>Stocks and ETFs live under <code>api/stocks/</code>, crypto under <code>api/crypto/</code>.</p>
-<pre><code>curl {e(site_url)}api/stocks/AAPL.json
-curl {e(site_url)}api/crypto/BTC.json</code></pre></div>
-    <div class="card"><h3>Get every ticker at once</h3><p>A compact index of all {n['total']:,} assets, or the full CSV.</p>
-<pre><code>curl {e(site_url)}api/index.json
-curl {e(site_url)}data/All_Assets.csv</code></pre></div>
-    <div class="card"><h3>LLM-ready context</h3><p><a href="llms.txt"><code>llms.txt</code></a> explains the dataset in plain text; <a href="llms-full.txt"><code>llms-full.txt</code></a> lists every ticker and name, one per line.</p></div>
-    <div class="card"><h3>Tool &amp; plugin specs</h3><p><a href="openapi.json"><code>openapi.json</code></a> describes every endpoint, so you can register TickerAtlas as a tool for an agent framework in one step.</p></div>
+<section class="block" id="downloads">
+  <div class="section-head">
+    <h2>Downloads</h2>
+    <p>Regenerated daily by GitHub Actions. Also available from the repo at <code>{e(RAW_URL)}/data/&lt;file&gt;</code>.</p>
   </div>
-</section>
-
-<section class="block">
-  <h2>Downloads</h2>
-  <p>Raw files, regenerated daily by GitHub Actions. Also available straight from the repository at <code>{e(RAW_URL)}/data/&lt;file&gt;</code>.</p>
-  <div class="table-scroll"><table class="tbl"><thead><tr><th>File</th><th>Contents</th></tr></thead><tbody>{downloads}</tbody></table></div>
+  <div class="files">{downloads}</div>
 </section>
 """
     ld = {
@@ -657,7 +723,6 @@ def docs_page(stats: Dict[str, Any], site_url: str, built: str) -> str:
     ep_rows = "".join(f'<tr><td><code>{e(p)}</code></td><td>{d}</td></tr>' for p, d in endpoints)
     body = f"""
 <section class="hero">
-  <p class="eyebrow">Reference</p>
   <h1>API &amp; AI access</h1>
   <p class="lede">TickerAtlas is a static API: plain JSON, CSV and text files served from GitHub Pages. There are no keys, no rate limits
   beyond GitHub's, and CORS is open, so you can call it from a browser, a notebook or an agent.</p>
@@ -758,7 +823,6 @@ def sources_page(stats: Dict[str, Any], site_url: str, built: str) -> str:
     commit = stats.get("crypto_source_commit") or "master"
     body = f"""
 <section class="hero">
-  <p class="eyebrow">Attribution</p>
   <h1>Sources &amp; licenses</h1>
   <p class="lede">TickerAtlas compiles public reference data from the sources below. Credit goes to them. Please cite them
   alongside TickerAtlas when you use this data.</p>
@@ -800,7 +864,7 @@ def not_found_page(site_url: str, built: str) -> str:
     # 404.html is served at arbitrary depths, so use absolute paths.
     base = site_url
     body = (
-        '<section class="hero"><p class="eyebrow">404</p><h1>No such ticker page.</h1>'
+        '<section class="hero"><h1>No such ticker page.</h1>'
         '<p class="lede">The ticker may not be in this universe, or the URL slug may be off. '
         f'<a href="{e(base)}index.html">Search all tickers</a> or read the <a href="{e(base)}docs.html">URL rules</a>.</p></section>'
     )
@@ -1006,8 +1070,8 @@ def sitemap(urls: List[str]) -> str:
 
 
 FAVICON = (
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="#0f6e6a" stroke-width="2.4">'
-    '<circle cx="16" cy="16" r="13"/><ellipse cx="16" cy="16" rx="5.5" ry="13"/><path d="M3.5 12h25M3.5 20h25"/></svg>\n'
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26"><rect x="1" y="1" width="24" height="24" rx="6" fill="#0a0a0b"/>'
+    '<path d="M7 17V12M11 17V8M15 17V13M19 17V10" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none"/></svg>\n'
 )
 
 

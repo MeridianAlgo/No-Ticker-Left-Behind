@@ -6,6 +6,14 @@
   var list = document.getElementById("results");
   var meta = document.getElementById("result-meta");
   var chips = Array.prototype.slice.call(document.querySelectorAll(".chip[data-type]"));
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest("[data-copy]") : null;
+    if (!b || !navigator.clipboard) return;
+    navigator.clipboard.writeText(b.getAttribute("data-copy")).then(function () {
+      b.textContent = "Copied";
+      setTimeout(function () { b.textContent = "Copy"; }, 1500);
+    });
+  });
   if (!input || !list) return;
 
   var MAX = 60;
@@ -61,15 +69,16 @@
     }
     meta.textContent = q
       ? (total > items.length ? "Top " + items.length + " of " + total.toLocaleString() + " matches" : total.toLocaleString() + (total === 1 ? " match" : " matches"))
-      : "Popular tickers — start typing to search " + rows.length.toLocaleString() + " assets";
+      : "Popular tickers. Start typing to search " + rows.length.toLocaleString() + " assets";
     var html = "";
     for (var i = 0; i < items.length; i++) {
       var r = items[i];
-      var sub = [r.x, r.k].filter(Boolean).join(" · ");
       html +=
         '<li><a href="' + href(r) + '">' +
         '<span class="t">' + highlight(r.t, q) + "</span>" +
-        '<span class="n"><div>' + highlight(r.n, q) + "</div>" + (sub ? '<div class="sub">' + esc(sub) + "</div>" : "") + "</span>" +
+        '<span class="n">' + highlight(r.n, q) + "</span>" +
+        '<span class="x">' + esc(r.c === "crypto" ? "Crypto" : r.x) + "</span>" +
+        '<span class="k">' + esc(r.c === "crypto" ? "Digital asset" : r.k) + "</span>" +
         '<span class="badge ' + badgeClass(r.c) + '">' + esc(r.c) + "</span></a></li>";
     }
     list.innerHTML = html;
